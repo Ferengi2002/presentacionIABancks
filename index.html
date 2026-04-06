@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Bank mAiles Pitch - Premium Slider</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Limelight&display=swap" rel="stylesheet">
+    <style>
+        /* === Variables y Configuración Default === */
+        :root {
+            --bg-dark: #05070a;
+            --bg-lighter: #0f121a;
+            --neon-cyan: #00f3ff;
+            --neon-cyan-glow: 0 0 15px rgba(0, 243, 255, 0.6), 0 0 30px rgba(0, 243, 255, 0.3);
+            --neon-gold: #ffcc00;
+            --neon-gold-glow: 0 0 15px rgba(255, 204, 0, 0.6), 0 0 30px rgba(255, 204, 0, 0.3);
+            --text-main: #f0f4f8;
+            --text-muted: #8e9bb0;
+            --transition-smooth: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            background: var(--bg-dark); 
+            color: var(--text-main); 
+            font-family: 'Montserrat', sans-serif; 
+            overflow: hidden; /* Evita scrolls dobles, manejado por el slider */
+        }
+
+        /* === Partículas y Elementos de Fondo === */
+        #particles-bg {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 1; pointer-events: none; opacity: 0.7;
+        }
+
+        /* === Scroll Slider Framework === */
+        .slider-container {
+            width: 100vw; height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            -ms-overflow-style: none; scrollbar-width: none;
+        }
+        .slider-container::-webkit-scrollbar { display: none; }
+
+        .slide {
+            position: relative;
+            width: 100vw; height: 100vh;
+            scroll-snap-align: start;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; z-index: 2;
+        }
+
+        /* === Manejo de Imagenes de Fondo y Parallax === */
+        .bg-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -2;
+            transform: scale(1.1); /* Estado inicial antes del parallax/zoom */
+            transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Suave zoom out/in al estar en view */
+        }
+        .slide.in-view .bg-img { transform: scale(1); }
+        
+        .bg-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        }
+
+        .container {
+            position: relative; z-index: 10;
+            max-width: 1200px; width: 90%; margin: 0 auto;
+            text-align: center;
+        }
+
+        /* === Clases de Animación (Micro-interacciones) === */
+        .fade-up { opacity: 0; transform: translateY(50px); transition: var(--transition-smooth); }
+        .scale-in { opacity: 0; transform: scale(0.9); transition: var(--transition-smooth); }
+        
+        .slide.in-view .fade-up { opacity: 1; transform: translateY(0); }
+        .slide.in-view .scale-in { opacity: 1; transform: scale(1); }
+        
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+        .delay-4 { transition-delay: 0.8s; }
+
+        /* Tipografías Globales */
+        h1, h2, h3, .counter { font-family: 'Limelight', cursive; text-transform: uppercase; line-height: 1.15; letter-spacing: 2px; text-shadow: 3px 3px 5px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,0.6); }
+        p, .subtitle { text-shadow: 2px 2px 4px rgba(0,0,0,1); font-weight: 600; color: #f8f9fa; }
+        .neon-cyan { color: var(--neon-cyan); text-shadow: 2px 2px 5px rgba(0,0,0,1), var(--neon-cyan-glow); }
+        .neon-gold { color: var(--neon-gold); text-shadow: 2px 2px 5px rgba(0,0,0,1), var(--neon-gold-glow); }
+
+        /* === SLIDE 1: Portada === */
+        .slide-1 .bg-overlay { background: radial-gradient(circle at center, rgba(5,7,10,0.6) 0%, rgba(5,7,10,0.95) 100%); }
+        .title-giant { font-size: 5rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 2px; }
+        .subtitle { font-size: 2rem; color: var(--text-muted); font-weight: 300; margin-bottom: 3rem; }
+        .btn-neon {
+            background: transparent; border: 1px solid var(--neon-cyan); color: var(--neon-cyan);
+            padding: 18px 45px; font-size: 1.2rem; font-weight: 600; text-transform: uppercase;
+            border-radius: 30px; cursor: pointer; letter-spacing: 2px;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2), inset 0 0 10px rgba(0, 243, 255, 0.1);
+            transition: all 0.4s ease; backdrop-filter: blur(5px); display: inline-block;
+        }
+        .btn-neon:hover {
+            box-shadow: var(--neon-cyan-glow), inset 0 0 20px rgba(0, 243, 255, 0.5);
+            background: rgba(0, 243, 255, 0.1); transform: translateY(-3px);
+        }
+        .pulse-anim { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.4); } 70% { box-shadow: 0 0 0 25px rgba(0, 243, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); } }
+
+        /* === SLIDE 2: Pantalla Dividida === */
+        .split-layout { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; z-index: 10; }
+        .split-panel {
+            flex: 1; position: relative; height: 100%; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; padding: 4rem; text-align: center; overflow: hidden;
+        }
+        .split-left .bg-overlay { background: linear-gradient(to right, rgba(5,7,10,0.95), rgba(5,7,10,0.8)); }
+        .split-right .bg-overlay { background: linear-gradient(to left, rgba(0,243,255,0.1), rgba(5,7,10,0.85)); }
+        .split-img { position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; z-index:-2; transition: transform 6s ease; transform: scale(1.1); filter: grayscale(50%); }
+        .slide.in-view .split-img { transform: scale(1); }
+        .split-panel h2 { font-size: 3rem; margin-bottom: 1rem; z-index: 2; }
+        .split-panel p { font-size: 1.2rem; color: var(--text-muted); z-index: 2; max-width: 400px; }
+        .vs-badge {
+            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+            width: 70px; height: 70px; background: var(--bg-dark); border: 2px solid var(--neon-cyan);
+            color: var(--neon-cyan); display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; font-weight: 800; font-size: 1.5rem; z-index: 20; box-shadow: var(--neon-cyan-glow);
+        }
+        .vs-badge.scale-in { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+        .slide.in-view .vs-badge.scale-in { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        .pitch-line { position: absolute; top: 0; left: 50%; width: 4px; height: 100%; background: var(--neon-cyan); transform: translateX(-50%); z-index: 15; box-shadow: var(--neon-cyan-glow); opacity: 0; }
+        .pitch-circle { position: absolute; top: 50%; left: 50%; width: 300px; height: 300px; border: 4px solid var(--neon-cyan); transform: translate(-50%, -50%) scale(0.8); border-radius: 50%; z-index: 15; box-shadow: 0 0 15px rgba(0,243,255,0.4), inset 0 0 15px rgba(0,243,255,0.4); opacity: 0; }
+        .slide.in-view .pitch-line { opacity: 0.3; }
+        .slide.in-view .pitch-circle { opacity: 0.25; transform: translate(-50%, -50%) scale(1); transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+
+        /* === SLIDE 3: Motor IA === */
+        .slide-3 .bg-overlay { background: rgba(5,7,10,0.85); backdrop-filter: blur(8px); }
+        .tactical-pitch { 
+            position: absolute; bottom: -20%; left: 50%; 
+            transform: translateX(-50%) perspective(1000px) rotateX(75deg); 
+            width: 150vw; height: 120vh; overflow: hidden;
+            border: none; z-index: 0; opacity: 0;
+            background-image: 
+                linear-gradient(transparent 49.8%, rgba(0, 243, 255, 0.7) 49.8%, rgba(0, 243, 255, 0.7) 50.2%, transparent 50.2%),
+                linear-gradient(rgba(0, 243, 255, 0.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 243, 255, 0.2) 1px, transparent 1px);
+            background-size: 100% 100%, 60px 60px, 60px 60px;
+            background-position: center center;
+            -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 60%);
+            mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 60%);
+        }
+        .slide.in-view .tactical-pitch { opacity: 1; transition: 2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .tactical-pitch::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 350px; height: 350px; border: 4px solid rgba(0, 243, 255, 0.6); border-radius: 50%; box-shadow: 0 0 30px rgba(0, 243, 255, 0.4), inset 0 0 30px rgba(0, 243, 255, 0.4); }
+        @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+        .tactical-pitch::before { content: '1 0 1 0 1 \A 0 1 1 0 0 \A 1 0 0 1 1 \A 0 1 0 1 0 \A 1 1 0 0 1 \A 0 0 1 0 0 \A 1 0 0 1 1'; white-space: pre; font-family: 'Space Grotesk', monospace; font-weight: 700; font-size: 3.5rem; letter-spacing: 1.5rem; color: rgba(0, 243, 255, 0.6); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent, rgba(0, 243, 255, 0.2), transparent); animation: scanline 4s linear infinite; pointer-events: none; text-align: center; line-height: 150px; text-shadow: 0 0 15px rgba(0,243,255,0.8); -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, transparent); mask-image: linear-gradient(to bottom, transparent, black 10%, transparent); mix-blend-mode: screen;}
+        .football-net-pattern { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg width='60' height='100' viewBox='0 0 60 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill-opacity='1' fill='%2300f3ff'/%3E%3C/svg%3E"); pointer-events: none;}
+        .brain-wrapper { position: relative; width: 300px; height: 300px; margin: 3rem auto; display: flex; justify-content: center; align-items: center; }
+        .brain-img { width: 180px; z-index: 5; animation: float 4s ease-in-out infinite; filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.8)); }
+        @keyframes float { 0% { transform: translateY(0px) scale(1); } 50% { transform: translateY(-15px) scale(1.05); } 100% { transform: translateY(0px) scale(1); } }
+        /* Nodos rotando alrededor del cerebro */
+        .orbit { position: absolute; border: 1px dashed rgba(0,243,255,0.3); border-radius: 50%; animation: spin 20s linear infinite; }
+        .orbit-1 { width: 300px; height: 300px; animation-duration: 25s; }
+        .orbit-2 { width: 220px; height: 220px; animation-duration: 15s; animation-direction: reverse; }
+        .node { position: absolute; width: 12px; height: 12px; border-radius: 50%; display:flex; justify-content:center; align-items:center; }
+        .node::after { content: '⚽'; font-size: 1.2rem; filter: drop-shadow(0 0 10px rgba(0,243,255,1)); }
+        .orbit-1 .node { top: -6px; left: 144px; }
+        .orbit-2 .node { bottom: -6px; left: 104px; }
+        .orbit-2 .node::after { filter: drop-shadow(0 0 10px rgba(255,204,0,1)); }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .scoreboard-title { font-family: 'Space Grotesk', sans-serif; font-size: 3.5rem; font-weight: 800; color: var(--neon-gold); text-shadow: 0 0 20px rgba(255, 204, 0, 0.8), 0 0 40px rgba(255, 204, 0, 0.4); margin-bottom: 0.5rem; letter-spacing: 5px; z-index: 5; position: relative;}
+        .scoreboard-subtitle { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--neon-cyan); letter-spacing: 3px; font-weight: 600; text-shadow: var(--neon-cyan-glow); z-index: 5; position: relative; margin-bottom: 2rem;}
+        
+        .ai-flow-container { display: flex; align-items: center; justify-content: center; gap: 2rem; width: 100%; max-width: 1200px; margin: 2rem auto; z-index: 5; position: relative;}
+        .data-side { display: flex; flex-direction: column; gap: 2rem; width: 300px; z-index: 10;}
+        
+        .glass-data-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(0, 243, 255, 0.3); border-radius: 12px; padding: 1.5rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 243, 255, 0.05); text-align: left; opacity: 0; transform: translateX(-30px); transition: var(--transition-smooth); }
+        .data-side.right .glass-data-panel { transform: translateX(30px); border-color: rgba(255, 204, 0, 0.3); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 204, 0, 0.05); }
+        .slide.in-view .glass-data-panel { opacity: 1; transform: translateX(0); }
+        
+        .micro-label { position: absolute; top: -12px; left: 15px; background: var(--bg-dark); color: var(--neon-cyan); padding: 2px 10px; font-size: 0.7rem; font-family: 'Space Grotesk', sans-serif; letter-spacing: 1px; border: 1px solid var(--neon-cyan); border-radius: 20px; box-shadow: var(--neon-cyan-glow); font-weight: 700; white-space: nowrap; }
+        .data-side.right .micro-label { color: var(--neon-gold); border-color: var(--neon-gold); box-shadow: var(--neon-gold-glow); left: auto; right: 15px; }
+        
+        .glass-data-panel h4 { font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.5rem; text-transform: uppercase; }
+        .glass-data-panel p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
+        
+        .data-stream { width: 120px; height: 3px; background: rgba(255,255,255,0.05); position: relative; overflow: visible; opacity: 0; transition: 1s ease 0.5s; align-self: center;}
+        .slide.in-view .data-stream { opacity: 1; }
+        .data-stream::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent); animation: stream-flow 2s linear infinite; }
+        .data-stream.right-stream::after { background: linear-gradient(90deg, transparent, var(--neon-gold), transparent); animation: stream-flow-reverse 2s linear infinite;}
+        @keyframes stream-flow { 0% { left: -100%; } 100% { left: 100%; } }
+        @keyframes stream-flow-reverse { 0% { left: 100%; } 100% { left: -100%; } }
+        
+        .heartbeat-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 250px; height: 250px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 243, 255, 0.4) 0%, transparent 60%); z-index: -1; animation: heartbeat 1.5s ease-in-out infinite alternate; pointer-events: none;}
+        @keyframes heartbeat { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; } 100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; } }
+
+        /* === SLIDE 4: Recompensas (Tarjetas 3D) === */
+        .slide-4 .bg-overlay { background: radial-gradient(circle at bottom, rgba(0,243,255,0.05), rgba(5,7,10,0.95) 80%); }
+        .cards-grid { display: flex; gap: 2.5rem; justify-content: center; margin-top: 4rem; perspective: 1200px; }
+        
+        .flip-card { width: 300px; height: 420px; perspective: 1200px; cursor: pointer; }
+        .flip-inner {
+            position: relative; width: 100%; height: 100%; border-radius: 20px;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d;
+        }
+        .flip-card:hover .flip-inner { transform: rotateY(180deg); box-shadow: var(--neon-cyan-glow); }
+        .flip-front, .flip-back {
+            position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden;
+            border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            overflow: hidden; border: 1px solid rgba(255,255,255,0.1); padding: 2rem;
+        }
+        .flip-front .card-bg-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; opacity: 0.6; transition: 0.3s; }
+        .flip-card:hover .flip-front .card-bg-img { opacity: 0.3; filter: grayscale(100%); }
+        .flip-front::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); z-index:-1; }
+        .flip-front h3 { z-index: 10; font-size: 1.8rem; text-shadow: 0 4px 10px rgba(0,0,0,1); letter-spacing: 1px; bottom: 30px; position: absolute; }
+        
+        .flip-back { background: var(--bg-lighter); transform: rotateY(180deg); text-align: center; border: 2px solid var(--neon-cyan); position: relative; }
+        .flip-back h3 { font-size: 1.8rem; margin-bottom: 1rem; position: relative; z-index: 2; }
+        .flip-back .points { font-size: 2.5rem; font-family: 'Limelight'; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,1); position: relative; z-index: 2; }
+        .flip-back p { color: var(--text-main); font-size: 1rem; line-height: 1.5; position: relative; z-index: 2; }
+        
+        .flip-back::before { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80%; height: 100px; border: 2px solid rgba(0,243,255,0.15); border-bottom: none; border-radius: 10px 10px 0 0; pointer-events: none; z-index: 1;}
+        .flip-back::after { content: '⚽'; position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); font-size: 2.5rem; opacity: 0.15; z-index: 1;}
+
+        .flip-card:nth-child(3) .flip-back { border-color: var(--neon-gold); } /* Tarjeta VIP Oro */
+        .flip-card:nth-child(3) .flip-back::before { border-color: rgba(255,204,0,0.15); }
+        .flip-card:nth-child(3) .flip-back::after { content: '🏆'; opacity: 0.2; font-size: 3rem;}
+
+        /* === SLIDE 5: VIP Lounge === */
+        .slide-5 .bg-overlay { background: rgba(5,7,10,0.85); backdrop-filter: blur(3px); }
+        .slide-5 .bg-img { opacity: 0.1; }
+        .profiles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
+        .profile-card {
+            border: 1px solid rgba(255,255,255,0.05); padding: 4rem 2rem 2.5rem 2rem;
+            border-radius: 15px; transition: 0.4s;
+            position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; min-height: 380px;
+        }
+        .profile-card-bg {
+            position: absolute; top:0; left:0; width:100%; height:100%; z-index: -2;
+            background-image: url('imagenes/personas.png');
+            background-size: 300% 100%;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .c-left .profile-card-bg { background-position: left center; }
+        .c-center .profile-card-bg { background-position: center center; }
+        .c-right .profile-card-bg { background-position: right center; }
+        
+        .profile-card-overlay {
+            position: absolute; top:0; left:0; width:100%; height:100%; z-index: -1;
+            background: linear-gradient(to top, rgba(10,12,18,0.95) 10%, rgba(10,12,18,0.4) 60%, transparent 100%);
+            transition: 0.6s;
+        }
+
+        .profile-card:hover { transform: translateY(-10px); border-color: rgba(0,243,255,0.4); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+        .profile-card:hover .profile-card-bg { transform: scale(1.15); }
+        .profile-card:hover .profile-card-overlay { background: linear-gradient(to top, rgba(10,12,18,0.95) 10%, rgba(0,243,255,0.2) 60%, transparent 100%); }
+        
+        .profile-content { position: relative; z-index: 5; margin-top: auto; }
+        .profile-card h4 { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--text-main); text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+        .profile-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+        .tag { background: rgba(0,243,255,0.1); color: var(--neon-cyan); padding: 8px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(0,243,255,0.2); backdrop-filter: blur(5px); }
+
+        /* === SLIDE 6: Cierre / Gran Final === */
+        .slide-6 .bg-overlay { background: radial-gradient(circle at top, rgba(10,14,25,1) 0%, var(--bg-dark) 100%); }
+        #canvas-confetti { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .massive-counter-container { position: relative; z-index: 10; margin: 3rem 0; }
+        .massive-counter { font-size: 8rem; color: var(--neon-cyan); text-shadow: 5px 5px 10px rgba(0,0,0,1), var(--neon-cyan-glow); font-family: 'Limelight', cursive; line-height: 1; }
+        .unit-label { font-size: 2rem; color: var(--neon-gold); font-weight: 600; letter-spacing: 3px; display: block; margin-top: -10px; text-shadow: 2px 2px 5px rgba(0,0,0,1); }
+        .closing-text { font-size: 2.5rem; font-weight: 400; color: var(--text-main); }
+
+        /* === Controles de Navegación Globales === */
+        .nav-dots { position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 15px; z-index: 100; align-items: center;}
+        .dot { width: 16px; height: 18px; background: var(--text-muted); opacity: 0.3; cursor: pointer; transition: 0.3s; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+        .dot.active { opacity: 1; background: var(--neon-cyan); filter: drop-shadow(0 0 8px var(--neon-cyan)); transform: scale(1.4); }
+        
+        .scroll-down { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 20; animation: bounce 2s infinite cubic-bezier(0.2, 0.8, 0.2, 1); opacity: 0.7; cursor: pointer; }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-15px) translateX(-50%); } 60% { transform: translateY(-7px) translateX(-50%); } }
+    </style>
+</head>
+<body>
+
+    <!-- Partículas de Fondo Global -->
+    <canvas id="particles-bg"></canvas>
+
+    <!-- Navegación Lateral -->
+    <div class="nav-dots">
+        <div class="dot active" onclick="scrollToSlide(0)"></div>
+        <div class="dot" onclick="scrollToSlide(1)"></div>
+        <div class="dot" onclick="scrollToSlide(2)"></div>
+        <div class="dot" onclick="scrollToSlide(3)"></div>
+        <div class="dot" onclick="scrollToSlide(4)"></div>
+        <div class="dot" onclick="scrollToSlide(5)"></div>
+    </div>
+
+    <!-- Contenedor Principal Scroll Snap -->
+    <div class="slider-container" id="slider">
+
+        <!-- SLIDE 1: Portada -->
+        <section class="slide slide-1" id="s1">
+            <img src="imagenes/balon.png" alt="Fondo Balon" class="bg-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\'/%3E'; this.style.backgroundColor='#111'">
+            <div class="bg-overlay"></div>
+            
+            <div class="container">
+                <h1 class="title-giant fade-up">AI-Bank <span class="neon-gold">mAiles</span></h1>
+                <h2 class="subtitle fade-up delay-1">El Pitazo Inicial de la Fidelización VIP</h2>
+                <div class="fade-up delay-2">
+                    <button class="btn-neon pulse-anim" onclick="scrollToSlide(1)">Iniciar Experiencia</button>
+                </div>
+            </div>
+            
+            <div class="scroll-down" onclick="scrollToSlide(1)">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: El Desafío -->
+        <section class="slide slide-2" id="s2">
+            <div class="split-layout">
+                <div class="split-panel split-left">
+                    <img src="imagenes/triste.png" alt="Fidelización Pasiva" class="split-img" onerror="this.style.backgroundColor='#1a1a1a'">
+                    <div class="bg-overlay"></div>
+                    <div class="content fade-up">
+                        <h2>Fidelización <br>Tradicional</h2>
+                        <p>Interacción pasiva, premios genéricos y clientes en la banca de suplentes.</p>
+                    </div>
+                </div>
+                
+                <div class="pitch-line scale-in"></div>
+                <div class="pitch-circle scale-in delay-1"></div>
+                <div class="vs-badge scale-in delay-2">VS</div>
+                
+                <div class="split-panel split-right">
+                    <img src="imagenes/feliz.png" alt="Celebración Game" class="split-img" onerror="this.style.backgroundColor='#0a0f1a'">
+                    <div class="bg-overlay"></div>
+                    <div class="content fade-up delay-1">
+                        <h2 class="neon-cyan">Engagement <br>Mundial 2026</h2>
+                        <p>Pronósticos en tiempo real impulsados por IA que ponen al cliente en la cancha.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: Motor IA -->
+        <section class="slide slide-3" id="s3">
+            <img src="imagenes/dashboard.png" alt="Dashboard BG" class="bg-img" style="filter: blur(8px);" onerror="this.src=''; this.style.backgroundColor='#05070a'">
+            <div class="bg-overlay"></div>
+
+            <div class="tactical-pitch scale-in delay-1"></div>
+            <div class="container" style="max-width: 1400px; width: 100%;">
+                <h2 class="scoreboard-title fade-up">AI NETWORKING</h2>
+                <h3 class="scoreboard-subtitle fade-up delay-1">Motor Predictivo IA</h3>
+                
+                <div class="ai-flow-container">
+                    <!-- Flujo Entrada Izquierda -->
+                    <div class="data-side left">
+                        <div class="glass-data-panel fade-up delay-1">
+                            <span class="micro-label">INPUT 01</span>
+                            <h4>Datos Financieros</h4>
+                            <p>Análisis de transacciones recurrentes, pagos, y perfil de gasto.</p>
+                        </div>
+                        <div class="glass-data-panel fade-up delay-2">
+                            <span class="micro-label">INPUT 02</span>
+                            <h4>Comportamiento</h4>
+                            <p>Geolocalización, hábitos digitales y uso de banca móvil.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Linea Neo Conectora Izquierda -->
+                    <div class="data-stream delay-3">
+                        <span class="micro-label" style="top:-30px; left:50%; transform:translateX(-50%);">10K PERFILES</span>
+                    </div>
+                    
+                    <!-- Núcleo Central -->
+                    <div class="brain-wrapper scale-in delay-2" style="margin: 0; width: 320px;">
+                        <div class="heartbeat-glow"></div>
+                        <div class="orbit orbit-1"><div class="node"></div></div>
+                        <div class="orbit orbit-2"><div class="node"></div></div>
+                        <img src="imagenes/cerebro.png" alt="Cerebro IA" class="brain-img" style="width: 200px;" onerror="this.src=''; this.style.display='none'">
+                    </div>
+                    
+                    <!-- Linea Neo Conectora Derecha -->
+                    <div class="data-stream right-stream delay-3">
+                        <span class="micro-label" style="top:-30px; left:50%; transform:translateX(-50%); border-color:var(--neon-gold); color:var(--neon-gold); box-shadow:var(--neon-gold-glow);">PROCESAMIENTO</span>
+                    </div>
+
+                    <!-- Flujo Salida Derecha -->
+                    <div class="data-side right">
+                        <div class="glass-data-panel fade-up delay-4">
+                            <span class="micro-label">OUTPUT AI</span>
+                            <h4 style="color: var(--neon-gold);">Análisis Categórico</h4>
+                            <p>Procesamiento avanzado para generar predicciones funcionales customizadas.</p>
+                        </div>
+                        <div class="glass-data-panel fade-up delay-4">
+                            <span class="micro-label">TARGET</span>
+                            <h4 style="color: var(--neon-gold);">Estrategia Inteligente</h4>
+                            <p>Despliegue de recompensas y beneficios únicos por cliente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: Sistema de Recompensas -->
+        <section class="slide slide-4" id="s4">
+            <div class="bg-overlay"></div>
+            
+            <div class="container">
+                <h2 class="title-giant fade-up" style="font-size: 3rem;">Goleada de Recompensas</h2>
+                <p class="fade-up delay-1" style="color: var(--text-muted); font-size: 1.2rem; margin-top: 10px;">Acumula mAiles en cada partido pronosticado.</p>
+
+                <div class="cards-grid">
+                    <!-- Tarjeta 1 -->
+                    <div class="flip-card fade-up delay-2">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <img src="imagenes/insignia.png" class="card-bg-img" onerror="this.src=''">
+                                <h3>Gol Simple</h3>
+                            </div>
+                            <div class="flip-back">
+                                <h3 class="neon-cyan">Gol Simple</h3>
+                                <div class="points">+500<br><span style="font-size:1rem; font-weight:400">mAiles</span></div>
+                                <p>Recompensa base por acertar el resultado del encuentro.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 2 -->
+                    <div class="flip-card fade-up delay-3">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <img src="imagenes/boost.png" class="card-bg-img" onerror="this.src=''">
+                                <h3>Racha Goleadora</h3>
+                            </div>
+                            <div class="flip-back">
+                                <h3 class="neon-cyan">Racha Goleadora</h3>
+                                <div class="points">Multiplicador<br><span style="font-size:3rem" class="neon-gold">X2</span></div>
+                                <p>Premio a la consistencia participativa a lo largo del torneo.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tarjeta 3 -->
+                    <div class="flip-card fade-up delay-4">
+                        <div class="flip-inner">
+                            <div class="flip-front">
+                                <img src="imagenes/ticket.png" class="card-bg-img" onerror="this.src=''">
+                                <h3>VIP de Campeonato</h3>
+                            </div>
+                            <div class="flip-back">
+                                <h3 class="neon-gold">VIP Oro</h3>
+                                <div class="points" style="font-size: 1.8rem;">Status Unlocked</div>
+                                <p>Acceso anticipado a entradas, experiencias exclusivas y mejores tasas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: VIP Lounge -->
+        <section class="slide slide-5" id="s5">
+            <img src="imagenes/personas.png" alt="Personas BG" class="bg-img" onerror="this.src=''; this.style.backgroundColor='#030508'">
+            <div class="bg-overlay"></div>
+
+            <div class="container">
+                <h2 class="title-giant fade-up" style="font-size: 3rem;">Plantilla VIP Personalizada</h2>
+                <p class="fade-up delay-1" style="color: var(--text-muted); font-size: 1.2rem; margin-top: 10px;">La IA actúa como DT, segmentando y adaptando los beneficios para cada estilo de vida.</p>
+
+                <div class="profiles-grid">
+                    <div class="profile-card fade-up delay-2 c-left">
+                        <div class="profile-card-bg"></div>
+                        <div class="profile-card-overlay"></div>
+                        <div class="profile-content">
+                            <h4>El Hincha Viajero</h4>
+                            <p>Alto perfil viajero e internacional.</p>
+                            <span class="tag">Viajes & Hospedaje</span>
+                        </div>
+                    </div>
+                    <div class="profile-card fade-up delay-3 c-center">
+                        <div class="profile-card-bg"></div>
+                        <div class="profile-card-overlay"></div>
+                        <div class="profile-content">
+                            <h4>El Hincha Digital</h4>
+                            <p>Adopción temprana de apps y plataformas.</p>
+                            <span class="tag">Streaming & Tech</span>
+                        </div>
+                    </div>
+                    <div class="profile-card fade-up delay-4 c-right">
+                        <div class="profile-card-bg"></div>
+                        <div class="profile-card-overlay"></div>
+                        <div class="profile-content">
+                            <h4>El Hincha Local</h4>
+                            <p>Preferencias por juntadas y eventos.</p>
+                            <span class="tag">Delivery & Gastronomía</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: Cierre -->
+        <section class="slide slide-6" id="s6">
+            <div class="bg-overlay"></div>
+            <!-- Canvas independiente para confetti -->
+            <canvas id="canvas-confetti"></canvas>
+            
+            <div class="container">
+                <h2 class="closing-text fade-up">Levantando la copa del <br><span class="neon-gold" style="font-weight: 700; font-size:3.5rem;">Engagement</span></h2>
+                
+                <div class="massive-counter-container scale-in delay-1">
+                    <div class="massive-counter" id="final-counter">0</div>
+                    <span class="unit-label">mAiles Generadas en el Torneo</span>
+                </div>
+                
+                <button class="btn-neon pulse-anim fade-up delay-3" onclick="scrollToSlide(0)" style="border-color: var(--neon-gold); color: var(--neon-gold); box-shadow: var(--neon-gold-glow);">Jugar de Nuevo</button>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- === Lógica JavaScript Vainilla === -->
+    <script>
+        // 1. Manejo del Observador de Intersección (Para animaciones CSS in-view y navegadores de puntos)
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const sliderContainer = document.getElementById('slider');
+        let counterAnimated = false; // Solo animar el contador una vez por entrada
+
+        const observerOptions = {
+            root: sliderContainer,
+            threshold: 0.5 // Se dispara cuando el 50% de la seccion es visible
+        };
+
+        const slideObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    
+                    // Actualizar Navigation Dots
+                    const index = Array.from(slides).indexOf(entry.target);
+                    dots.forEach(d => d.classList.remove('active'));
+                    if(dots[index]) dots[index].classList.add('active');
+
+                    // Disparar Animación de Contador en Slide 6
+                    if (entry.target.id === 's6' && !counterAnimated) {
+                        animateCounter();
+                        triggerConfetti();
+                        counterAnimated = true;
+                    }
+                } else {
+                    entry.target.classList.remove('in-view'); 
+                    if(entry.target.id === 's6') {
+                        counterAnimated = false; // permite re-animar si sale y entra
+                    }
+                }
+            });
+        }, observerOptions);
+
+        slides.forEach(slide => slideObserver.observe(slide));
+
+        // Función para saltar a un slide específico
+        function scrollToSlide(index) {
+            slides[index].scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Soporte de navegación por teclado
+        document.addEventListener('keydown', (e) => {
+            const activeIndex = Array.from(dots).findIndex(d => d.classList.contains('active'));
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                if (activeIndex < slides.length - 1) scrollToSlide(activeIndex + 1);
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                if (activeIndex > 0) scrollToSlide(activeIndex - 1);
+            }
+        });
+
+        // 2. Sistema Global de Partículas (Background Estético)
+        const canvasBg = document.getElementById('particles-bg');
+        const ctxBg = canvasBg.getContext('2d');
+        let particlesArray = [];
+        
+        function initParticlesBg() {
+            canvasBg.width = window.innerWidth;
+            canvasBg.height = window.innerHeight;
+            particlesArray = [];
+            const numberOfParticles = (window.innerWidth * window.innerHeight) / 10000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push({
+                    x: Math.random() * canvasBg.width,
+                    y: Math.random() * canvasBg.height,
+                    size: Math.random() * 3 + 1,
+                    speedX: (Math.random() - 0.5) * 0.5,
+                    speedY: (Math.random() - 0.5) * 0.5,
+                    color: Math.random() > 0.5 ? '#00f3ff' : '#ffcc00'
+                });
+            }
+        }
+        
+        function drawHexagon(ctx, x, y, size, color) {
+            ctx.beginPath();
+            for (let i = 0; i < 6; i++) {
+                ctx.lineTo(x + size * Math.cos(i * Math.PI / 3), y + size * Math.sin(i * Math.PI / 3));
+            }
+            ctx.closePath();
+            ctx.fillStyle = color;
+            ctx.globalAlpha = 0.4;
+            ctx.fill();
+        }
+
+        function animateParticlesBg() {
+            ctxBg.clearRect(0, 0, canvasBg.width, canvasBg.height);
+            particlesArray.forEach(p => {
+                p.x += p.speedX; p.y += p.speedY;
+                // Rebotar bordes
+                if (p.x < 0 || p.x > canvasBg.width) p.speedX *= -1;
+                if (p.y < 0 || p.y > canvasBg.height) p.speedY *= -1;
+                
+                drawHexagon(ctxBg, p.x, p.y, p.size, p.color);
+            });
+            requestAnimationFrame(animateParticlesBg);
+        }
+        
+        window.addEventListener('resize', initParticlesBg);
+        initParticlesBg();
+        animateParticlesBg();
+
+        // 3. Animación Digital del Gran Contador (Slide 6)
+        function animateCounter() {
+            const counterElement = document.getElementById('final-counter');
+            let startCount = 0;
+            const targetCount = 250000;
+            const duration = 2500; // 2.5 segundos
+            const startTime = performance.now();
+
+            function updateCounter(currentTime) {
+                const elapsedTime = currentTime - startTime;
+                const progress = Math.min(elapsedTime / duration, 1);
+                
+                // Ease Out Expo Easing function (rápido al principio, lento al final)
+                const easeOutProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                
+                const currentCount = Math.floor(easeOutProgress * targetCount);
+                counterElement.innerText = currentCount.toLocaleString('es-ES'); // Formato con separador de miles
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counterElement.innerText = targetCount.toLocaleString('es-ES'); // Asegurar final exacto
+                }
+            }
+            requestAnimationFrame(updateCounter);
+        }
+
+        // 4. Efecto Especial de "Confetti Neón / Estrellas" (Slide 6)
+        const canvasConfetti = document.getElementById('canvas-confetti');
+        const ctxConfetti = canvasConfetti.getContext('2d');
+        let confettiArray = [];
+        let confettiActive = false;
+
+        function triggerConfetti() {
+            canvasConfetti.width = window.innerWidth;
+            canvasConfetti.height = window.innerHeight;
+            confettiArray = [];
+            confettiActive = true;
+
+            const colors = ['#00f3ff', '#ffcc00', '#ffffff'];
+            for (let i = 0; i < 150; i++) {
+                const randType = Math.random();
+                confettiArray.push({
+                    x: Math.random() * canvasConfetti.width,
+                    y: Math.random() * canvasConfetti.height - canvasConfetti.height,
+                    size: randType < 0.2 ? Math.random() * 15 + 15 : Math.random() * 3 + 2,
+                    speedY: Math.random() * 3 + 2,
+                    speedX: (Math.random() - 0.5) * 2,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    type: randType < 0.15 ? '⚽' : (randType < 0.20 ? '🏆' : 'dot')
+                });
+            }
+            if(!confettiLooping) {
+                confettiLooping = true;
+                animateConfetti();
+            }
+        }
+        let confettiLooping = false;
+
+        function animateConfetti() {
+            if(!confettiActive) return;
+            ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+            let activeParticles = 0;
+            
+            confettiArray.forEach(c => {
+                c.y += c.speedY;
+                c.x += c.speedX;
+                if (c.y < canvasConfetti.height) activeParticles++;
+                
+                ctxConfetti.shadowBlur = 10;
+                ctxConfetti.shadowColor = c.color;
+                ctxConfetti.fillStyle = c.color;
+
+                if (c.type === 'dot') {
+                    ctxConfetti.beginPath();
+                    ctxConfetti.arc(c.x, c.y, c.size, 0, Math.PI * 2);
+                    ctxConfetti.fill();
+                } else {
+                    ctxConfetti.font = c.size + "px Arial";
+                    ctxConfetti.fillText(c.type, c.x, c.y);
+                }
+            });
+
+            if (activeParticles > 0) {
+                requestAnimationFrame(animateConfetti);
+            } else {
+                confettiLooping = false;
+                ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+            }
+        }
+    </script>
+</body>
+</html>
