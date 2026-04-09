@@ -3,284 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Bank mAiles Pitch - Premium Slider</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Limelight&display=swap" rel="stylesheet">
+    <title>AI-Bank 2026 - Presentación</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Limelight&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* === Variables y Configuración Default === */
         :root {
             --bg-dark: #05070a;
-            --bg-lighter: #0f121a;
             --neon-cyan: #00f3ff;
             --neon-cyan-glow: 0 0 15px rgba(0, 243, 255, 0.6), 0 0 30px rgba(0, 243, 255, 0.3);
             --neon-gold: #ffcc00;
             --neon-gold-glow: 0 0 15px rgba(255, 204, 0, 0.6), 0 0 30px rgba(255, 204, 0, 0.3);
+            --neon-magenta: #ff2d95;
+            --neon-green: #39ff14;
             --text-main: #f0f4f8;
-            --text-muted: #8e9bb0;
+            --text-muted: #a0aec0;
             --transition-smooth: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            background: var(--bg-dark); 
-            color: var(--text-main); 
-            font-family: 'Montserrat', sans-serif; 
-            overflow: hidden; /* Evita scrolls dobles, manejado por el slider */
-        }
+        body { background: var(--bg-dark); color: var(--text-main); font-family: 'Montserrat', sans-serif; overflow: hidden; }
 
-        /* === Partículas y Elementos de Fondo === */
         #particles-bg {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 1; pointer-events: none; opacity: 0.7;
+            z-index: 1; pointer-events: none; opacity: 0.5;
         }
 
-        /* === Scroll Slider Framework === */
         .slider-container {
             width: 100vw; height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
+            overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth;
             -ms-overflow-style: none; scrollbar-width: none;
         }
         .slider-container::-webkit-scrollbar { display: none; }
 
         .slide {
-            position: relative;
-            width: 100vw; height: 100vh;
-            scroll-snap-align: start;
-            display: flex; align-items: center; justify-content: center;
+            position: relative; width: 100vw; height: 100vh;
+            scroll-snap-align: start; display: flex; align-items: center; justify-content: center;
             overflow: hidden; z-index: 2;
         }
+        .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .container { position: relative; z-index: 10; max-width: 1200px; width: 90%; margin: 0 auto; text-align: center; }
 
-        /* === Manejo de Imagenes de Fondo y Parallax === */
-        .bg-img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; z-index: -2;
-            transform: scale(1.1); /* Estado inicial antes del parallax/zoom */
-            transition: transform 6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Suave zoom out/in al estar en view */
-        }
-        .slide.in-view .bg-img { transform: scale(1); }
-        
-        .bg-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-        }
-
-        .container {
-            position: relative; z-index: 10;
-            max-width: 1200px; width: 90%; margin: 0 auto;
-            text-align: center;
-        }
-
-        /* === Clases de Animación (Micro-interacciones) === */
-        .fade-up { opacity: 0; transform: translateY(50px); transition: var(--transition-smooth); }
+        /* Animations - simplified for performance */
+        .fade-up { opacity: 0; transform: translateY(40px); transition: var(--transition-smooth); }
         .scale-in { opacity: 0; transform: scale(0.9); transition: var(--transition-smooth); }
-        
         .slide.in-view .fade-up { opacity: 1; transform: translateY(0); }
         .slide.in-view .scale-in { opacity: 1; transform: scale(1); }
-        
-        .delay-1 { transition-delay: 0.2s; }
-        .delay-2 { transition-delay: 0.4s; }
-        .delay-3 { transition-delay: 0.6s; }
-        .delay-4 { transition-delay: 0.8s; }
+        .delay-1 { transition-delay: 0.15s; } .delay-2 { transition-delay: 0.3s; }
+        .delay-3 { transition-delay: 0.45s; } .delay-4 { transition-delay: 0.6s; }
+        .delay-5 { transition-delay: 0.75s; }
 
-        /* Tipografías Globales */
-        h1, h2, h3, .counter { font-family: 'Limelight', cursive; text-transform: uppercase; line-height: 1.15; letter-spacing: 2px; text-shadow: 3px 3px 5px rgba(0,0,0,1), 0 0 20px rgba(0,0,0,0.6); }
-        p, .subtitle { text-shadow: 2px 2px 4px rgba(0,0,0,1); font-weight: 600; color: #f8f9fa; }
-        .neon-cyan { color: var(--neon-cyan); text-shadow: 2px 2px 5px rgba(0,0,0,1), var(--neon-cyan-glow); }
-        .neon-gold { color: var(--neon-gold); text-shadow: 2px 2px 5px rgba(0,0,0,1), var(--neon-gold-glow); }
+        @keyframes float { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
+        @keyframes gradient-shift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* === SLIDE 1: Portada === */
-        .slide-1 .bg-overlay { background: radial-gradient(circle at center, rgba(5,7,10,0.6) 0%, rgba(5,7,10,0.95) 100%); }
-        .title-giant { font-size: 5rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: 2px; }
-        .subtitle { font-size: 2rem; color: var(--text-muted); font-weight: 300; margin-bottom: 3rem; }
-        .btn-neon {
-            background: transparent; border: 1px solid var(--neon-cyan); color: var(--neon-cyan);
-            padding: 18px 45px; font-size: 1.2rem; font-weight: 600; text-transform: uppercase;
-            border-radius: 30px; cursor: pointer; letter-spacing: 2px;
-            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2), inset 0 0 10px rgba(0, 243, 255, 0.1);
-            transition: all 0.4s ease; backdrop-filter: blur(5px); display: inline-block;
-        }
-        .btn-neon:hover {
-            box-shadow: var(--neon-cyan-glow), inset 0 0 20px rgba(0, 243, 255, 0.5);
-            background: rgba(0, 243, 255, 0.1); transform: translateY(-3px);
-        }
-        .pulse-anim { animation: pulse 2s infinite; }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.4); } 70% { box-shadow: 0 0 0 25px rgba(0, 243, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); } }
+        /* Typography */
+        h1, h2, h3 { font-family: 'Limelight', cursive; text-transform: uppercase; line-height: 1.15; letter-spacing: 2px; }
+        p, .subtitle { font-weight: 600; color: #f0f4f8; }
+        .neon-cyan { color: var(--neon-cyan); text-shadow: var(--neon-cyan-glow); }
+        .neon-gold { color: var(--neon-gold); text-shadow: var(--neon-gold-glow); }
 
-        /* === SLIDE 2: Pantalla Dividida === */
-        .split-layout { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; z-index: 10; }
-        .split-panel {
-            flex: 1; position: relative; height: 100%; display: flex; flex-direction: column; 
-            justify-content: center; align-items: center; padding: 4rem; text-align: center; overflow: hidden;
+        /* Title - vibrant cyan glow, NO black */
+        .title-giant { 
+            font-size: 6rem; font-weight: 900; margin-bottom: 0.5rem; letter-spacing: 5px;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px rgba(0,243,255,0.8), 0 0 40px rgba(0,243,255,0.5), 0 0 80px rgba(0,243,255,0.3), 0 0 120px rgba(0,243,255,0.15);
         }
-        .split-left .bg-overlay { background: linear-gradient(to right, rgba(5,7,10,0.95), rgba(5,7,10,0.8)); }
-        .split-right .bg-overlay { background: linear-gradient(to left, rgba(0,243,255,0.1), rgba(5,7,10,0.85)); }
-        .split-img { position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; z-index:-2; transition: transform 6s ease; transform: scale(1.1); filter: grayscale(50%); }
-        .slide.in-view .split-img { transform: scale(1); }
-        .split-panel h2 { font-size: 3rem; margin-bottom: 1rem; z-index: 2; }
-        .split-panel p { font-size: 1.2rem; color: var(--text-muted); z-index: 2; max-width: 400px; }
-        .vs-badge {
-            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-            width: 70px; height: 70px; background: var(--bg-dark); border: 2px solid var(--neon-cyan);
-            color: var(--neon-cyan); display: flex; align-items: center; justify-content: center;
-            border-radius: 50%; font-weight: 800; font-size: 1.5rem; z-index: 20; box-shadow: var(--neon-cyan-glow);
-        }
-        .vs-badge.scale-in { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-        .slide.in-view .vs-badge.scale-in { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-        .pitch-line { position: absolute; top: 0; left: 50%; width: 4px; height: 100%; background: var(--neon-cyan); transform: translateX(-50%); z-index: 15; box-shadow: var(--neon-cyan-glow); opacity: 0; }
-        .pitch-circle { position: absolute; top: 50%; left: 50%; width: 300px; height: 300px; border: 4px solid var(--neon-cyan); transform: translate(-50%, -50%) scale(0.8); border-radius: 50%; z-index: 15; box-shadow: 0 0 15px rgba(0,243,255,0.4), inset 0 0 15px rgba(0,243,255,0.4); opacity: 0; }
-        .slide.in-view .pitch-line { opacity: 0.3; }
-        .slide.in-view .pitch-circle { opacity: 0.25; transform: translate(-50%, -50%) scale(1); transition: 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .section-title { font-size: 3.5rem; margin-bottom: 1.5rem; color: var(--text-main); text-shadow: 0 0 15px rgba(255,255,255,0.2); }
 
-        /* === SLIDE 3: Motor IA === */
-        .slide-3 .bg-overlay { background: rgba(5,7,10,0.85); backdrop-filter: blur(8px); }
-        .tactical-pitch { 
-            position: absolute; bottom: -20%; left: 50%; 
-            transform: translateX(-50%) perspective(1000px) rotateX(75deg); 
-            width: 150vw; height: 120vh; overflow: hidden;
-            border: none; z-index: 0; opacity: 0;
-            background-image: 
-                linear-gradient(transparent 49.8%, rgba(0, 243, 255, 0.7) 49.8%, rgba(0, 243, 255, 0.7) 50.2%, transparent 50.2%),
-                linear-gradient(rgba(0, 243, 255, 0.2) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 243, 255, 0.2) 1px, transparent 1px);
-            background-size: 100% 100%, 60px 60px, 60px 60px;
-            background-position: center center;
-            -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 60%);
-            mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 60%);
-        }
-        .slide.in-view .tactical-pitch { opacity: 1; transition: 2s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        .tactical-pitch::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 350px; height: 350px; border: 4px solid rgba(0, 243, 255, 0.6); border-radius: 50%; box-shadow: 0 0 30px rgba(0, 243, 255, 0.4), inset 0 0 30px rgba(0, 243, 255, 0.4); }
-        @keyframes scanline { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
-        .tactical-pitch::before { content: '1 0 1 0 1 \A 0 1 1 0 0 \A 1 0 0 1 1 \A 0 1 0 1 0 \A 1 1 0 0 1 \A 0 0 1 0 0 \A 1 0 0 1 1'; white-space: pre; font-family: 'Space Grotesk', monospace; font-weight: 700; font-size: 3.5rem; letter-spacing: 1.5rem; color: rgba(0, 243, 255, 0.6); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent, rgba(0, 243, 255, 0.2), transparent); animation: scanline 4s linear infinite; pointer-events: none; text-align: center; line-height: 150px; text-shadow: 0 0 15px rgba(0,243,255,0.8); -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, transparent); mask-image: linear-gradient(to bottom, transparent, black 10%, transparent); mix-blend-mode: screen;}
-        .football-net-pattern { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.05; background-image: url("data:image/svg+xml,%3Csvg width='60' height='100' viewBox='0 0 60 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l25.98 15v30L30 60 4.02 45V15z' fill-opacity='1' fill='%2300f3ff'/%3E%3C/svg%3E"); pointer-events: none;}
-        .brain-wrapper { position: relative; width: 300px; height: 300px; margin: 3rem auto; display: flex; justify-content: center; align-items: center; }
-        .brain-img { width: 180px; z-index: 5; animation: float 4s ease-in-out infinite; filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.8)); }
-        @keyframes float { 0% { transform: translateY(0px) scale(1); } 50% { transform: translateY(-15px) scale(1.05); } 100% { transform: translateY(0px) scale(1); } }
-        /* Nodos rotando alrededor del cerebro */
-        .orbit { position: absolute; border: 1px dashed rgba(0,243,255,0.3); border-radius: 50%; animation: spin 20s linear infinite; }
-        .orbit-1 { width: 300px; height: 300px; animation-duration: 25s; }
-        .orbit-2 { width: 220px; height: 220px; animation-duration: 15s; animation-direction: reverse; }
-        .node { position: absolute; width: 12px; height: 12px; border-radius: 50%; display:flex; justify-content:center; align-items:center; }
-        .node::after { content: '⚽'; font-size: 1.2rem; filter: drop-shadow(0 0 10px rgba(0,243,255,1)); }
-        .orbit-1 .node { top: -6px; left: 144px; }
-        .orbit-2 .node { bottom: -6px; left: 104px; }
-        .orbit-2 .node::after { filter: drop-shadow(0 0 10px rgba(255,204,0,1)); }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        .scoreboard-title { font-family: 'Space Grotesk', sans-serif; font-size: 3.5rem; font-weight: 800; color: var(--neon-gold); text-shadow: 0 0 20px rgba(255, 204, 0, 0.8), 0 0 40px rgba(255, 204, 0, 0.4); margin-bottom: 0.5rem; letter-spacing: 5px; z-index: 5; position: relative;}
-        .scoreboard-subtitle { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--neon-cyan); letter-spacing: 3px; font-weight: 600; text-shadow: var(--neon-cyan-glow); z-index: 5; position: relative; margin-bottom: 2rem;}
-        
-        .ai-flow-container { display: flex; align-items: center; justify-content: center; gap: 2rem; width: 100%; max-width: 1200px; margin: 2rem auto; z-index: 5; position: relative;}
-        .data-side { display: flex; flex-direction: column; gap: 2rem; width: 300px; z-index: 10;}
-        
-        .glass-data-panel { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(12px); border: 1px solid rgba(0, 243, 255, 0.3); border-radius: 12px; padding: 1.5rem; position: relative; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 243, 255, 0.05); text-align: left; opacity: 0; transform: translateX(-30px); transition: var(--transition-smooth); }
-        .data-side.right .glass-data-panel { transform: translateX(30px); border-color: rgba(255, 204, 0, 0.3); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 204, 0, 0.05); }
-        .slide.in-view .glass-data-panel { opacity: 1; transform: translateX(0); }
-        
-        .micro-label { position: absolute; top: -12px; left: 15px; background: var(--bg-dark); color: var(--neon-cyan); padding: 2px 10px; font-size: 0.7rem; font-family: 'Space Grotesk', sans-serif; letter-spacing: 1px; border: 1px solid var(--neon-cyan); border-radius: 20px; box-shadow: var(--neon-cyan-glow); font-weight: 700; white-space: nowrap; }
-        .data-side.right .micro-label { color: var(--neon-gold); border-color: var(--neon-gold); box-shadow: var(--neon-gold-glow); left: auto; right: 15px; }
-        
-        .glass-data-panel h4 { font-size: 1.1rem; color: var(--text-main); margin-bottom: 0.5rem; text-transform: uppercase; }
-        .glass-data-panel p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
-        
-        .data-stream { width: 120px; height: 3px; background: rgba(255,255,255,0.05); position: relative; overflow: visible; opacity: 0; transition: 1s ease 0.5s; align-self: center;}
-        .slide.in-view .data-stream { opacity: 1; }
-        .data-stream::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent); animation: stream-flow 2s linear infinite; }
-        .data-stream.right-stream::after { background: linear-gradient(90deg, transparent, var(--neon-gold), transparent); animation: stream-flow-reverse 2s linear infinite;}
-        @keyframes stream-flow { 0% { left: -100%; } 100% { left: 100%; } }
-        @keyframes stream-flow-reverse { 0% { left: 100%; } 100% { left: -100%; } }
-        
-        .heartbeat-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 250px; height: 250px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 243, 255, 0.4) 0%, transparent 60%); z-index: -1; animation: heartbeat 1.5s ease-in-out infinite alternate; pointer-events: none;}
-        @keyframes heartbeat { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.5; } 100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; } }
+        /* Mascot */
+        #mascot-container { position: fixed; bottom: 20px; right: 30px; z-index: 1000; transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); opacity: 0; transform: translateX(50px); }
+        #mascot-container.visible { opacity: 1; transform: translateX(0); }
+        #mascot-bubble { background: rgba(10, 15, 25, 0.9); backdrop-filter: blur(15px); border: 1px solid var(--neon-cyan); border-radius: 15px; padding: 12px; position: absolute; bottom: 135px; right: 5px; width: 230px; opacity: 0; transform: translateY(20px); transition: 0.5s; box-shadow: var(--neon-cyan-glow); color: var(--text-main); font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; line-height: 1.4; border-bottom-right-radius: 0; }
+        #mascot-bubble.show { opacity: 1; transform: translateY(0); }
+        .mascot-img { width: 115px; filter: drop-shadow(0 0 15px rgba(0,243,255,0.6)); animation: float 4s infinite ease-in-out; }
 
-        /* === SLIDE 4: Recompensas (Tarjetas 3D) === */
-        .slide-4 .bg-overlay { background: radial-gradient(circle at bottom, rgba(0,243,255,0.05), rgba(5,7,10,0.95) 80%); }
-        .cards-grid { display: flex; gap: 2.5rem; justify-content: center; margin-top: 4rem; perspective: 1200px; }
-        
-        .flip-card { width: 300px; height: 420px; perspective: 1200px; cursor: pointer; }
-        .flip-inner {
-            position: relative; width: 100%; height: 100%; border-radius: 20px;
-            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d;
-        }
-        .flip-card:hover .flip-inner { transform: rotateY(180deg); box-shadow: var(--neon-cyan-glow); }
-        .flip-front, .flip-back {
-            position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden;
-            border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            overflow: hidden; border: 1px solid rgba(255,255,255,0.1); padding: 2rem;
-        }
-        .flip-front .card-bg-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; opacity: 0.6; transition: 0.3s; }
-        .flip-card:hover .flip-front .card-bg-img { opacity: 0.3; filter: grayscale(100%); }
-        .flip-front::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); z-index:-1; }
-        .flip-front h3 { z-index: 10; font-size: 1.8rem; text-shadow: 0 4px 10px rgba(0,0,0,1); letter-spacing: 1px; bottom: 30px; position: absolute; }
-        
-        .flip-back { background: var(--bg-lighter); transform: rotateY(180deg); text-align: center; border: 2px solid var(--neon-cyan); position: relative; }
-        .flip-back h3 { font-size: 1.8rem; margin-bottom: 1rem; position: relative; z-index: 2; }
-        .flip-back .points { font-size: 2.5rem; font-family: 'Limelight'; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,1); position: relative; z-index: 2; }
-        .flip-back p { color: var(--text-main); font-size: 1rem; line-height: 1.5; position: relative; z-index: 2; }
-        
-        .flip-back::before { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80%; height: 100px; border: 2px solid rgba(0,243,255,0.15); border-bottom: none; border-radius: 10px 10px 0 0; pointer-events: none; z-index: 1;}
-        .flip-back::after { content: '⚽'; position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); font-size: 2.5rem; opacity: 0.15; z-index: 1;}
+        /* Panels */
+        .glass-panel { background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(0,243,255,0.25); border-radius: 15px; padding: 2rem; box-shadow: 0 8px 25px rgba(0,0,0,0.4); text-align: left; transition: 0.4s; }
+        .glass-panel:hover { border-color: var(--neon-cyan); transform: translateY(-3px); }
+        .grid-cols-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .grid-cols-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        .grid-cols-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .mt-3 { margin-top: 1.5rem; } .mt-4 { margin-top: 2rem; }
 
-        .flip-card:nth-child(3) .flip-back { border-color: var(--neon-gold); } /* Tarjeta VIP Oro */
-        .flip-card:nth-child(3) .flip-back::before { border-color: rgba(255,204,0,0.15); }
-        .flip-card:nth-child(3) .flip-back::after { content: '🏆'; opacity: 0.2; font-size: 3rem;}
+        /* Tech cards */
+        .tech-card { border: 1px solid rgba(255,204,0,0.3); background: rgba(5,7,10,0.85); border-radius: 15px; padding: 2rem; text-align: center; transition: 0.4s; }
+        .tech-card:hover { transform: translateY(-6px); box-shadow: var(--neon-gold-glow); border-color: var(--neon-gold); }
+        .tech-card h3 { color: var(--neon-gold); font-size: 1.4rem; margin-bottom: 0.8rem; }
+        .tech-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; }
 
-        /* === SLIDE 5: VIP Lounge === */
-        .slide-5 .bg-overlay { background: rgba(5,7,10,0.85); backdrop-filter: blur(3px); }
-        .slide-5 .bg-img { opacity: 0.1; }
-        .profiles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
-        .profile-card {
-            border: 1px solid rgba(255,255,255,0.05); padding: 4rem 2rem 2.5rem 2rem;
-            border-radius: 15px; transition: 0.4s;
-            position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; min-height: 380px;
-        }
-        .profile-card-bg {
-            position: absolute; top:0; left:0; width:100%; height:100%; z-index: -2;
-            background-image: url('imagenes/personas.png');
-            background-size: 300% 100%;
-            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        .c-left .profile-card-bg { background-position: left center; }
-        .c-center .profile-card-bg { background-position: center center; }
-        .c-right .profile-card-bg { background-position: right center; }
+        /* Stats */
+        .stat-box { text-align: center; padding: 1.2rem; }
+        .stat-number { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 2.5rem; margin-bottom: 4px; }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Slide backgrounds */
+        .slide-1 .bg-overlay { background: radial-gradient(ellipse at 30% 50%, rgba(0,243,255,0.1) 0%, transparent 50%), radial-gradient(ellipse at 70% 50%, rgba(255,204,0,0.06) 0%, transparent 50%), rgba(5,7,10,0.95); }
+        .slide-2 .bg-overlay { background: linear-gradient(135deg, rgba(0,243,255,0.06), rgba(5,7,10,0.95) 50%, rgba(255,45,149,0.04)); }
+        .slide-3 .bg-overlay { background: radial-gradient(circle at 70% 50%, rgba(255,204,0,0.08), transparent 50%), rgba(5,7,10,0.93); }
+        .slide-4 .bg-overlay { background: radial-gradient(ellipse at center, rgba(0,243,255,0.05), rgba(5,7,10,0.95)); }
+        .slide-5 .bg-overlay { background: radial-gradient(circle at center, rgba(255,204,0,0.06), transparent 50%), rgba(5,7,10,0.93); }
+        .slide-6 .bg-overlay { background: radial-gradient(circle at 30% 30%, rgba(255,45,149,0.06), transparent 50%), radial-gradient(circle at 70% 70%, rgba(0,243,255,0.06), transparent 50%), rgba(5,7,10,0.93); }
+        .slide-7 .bg-overlay { background: radial-gradient(circle at 50% 50%, rgba(255,204,0,0.05), transparent 50%), rgba(5,7,10,0.93); }
+        .slide-8 .bg-overlay { background: linear-gradient(135deg, rgba(57,255,20,0.03), rgba(5,7,10,0.95) 50%, rgba(0,243,255,0.04)); }
+        .slide-9 .bg-overlay { background: radial-gradient(circle at center, rgba(255,204,0,0.05), transparent 50%), rgba(5,7,10,0.92); }
+        .slide-10 .bg-overlay { background: radial-gradient(ellipse at center, rgba(0,243,255,0.08), transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(255,204,0,0.06), transparent 40%), rgba(5,7,10,0.9); }
+
+        /* Integrantes */
+        .integrante-card { background: linear-gradient(180deg, rgba(0,243,255,0.06) 0%, rgba(0,0,0,0.6) 100%); border: 1px solid rgba(0,243,255,0.2); border-radius: 12px; padding: 1.5rem 1rem; text-align: center; transition: 0.35s; }
+        .integrante-card:hover { border-color: var(--neon-cyan); transform: translateY(-4px); }
+        .integrante-card h4 { color: var(--neon-cyan); margin-bottom: 5px; font-family: 'Space Grotesk'; font-size: 1.15rem; }
+        .integrante-card p { color: var(--neon-gold); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; }
+
+        /* Video */
+        .video-container { width: 85%; max-width: 950px; margin: 1.5rem auto; aspect-ratio: 16/9; background: #000; border: 2px solid var(--neon-cyan); border-radius: 15px; box-shadow: var(--neon-cyan-glow); overflow: hidden; }
+        .video-container video { width: 100%; height: 100%; object-fit: contain; }
+
+        /* Split layout */
+        .split-box { display: flex; gap: 2rem; align-items: stretch; text-align: left; }
+        .split-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .split-img-box { flex: 1; border: 1px solid var(--neon-gold); border-radius: 15px; overflow: hidden; box-shadow: var(--neon-gold-glow); }
+        .split-img-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* AI Flow */
+        .ai-flow { padding: 2rem; border: 1px dashed rgba(0,243,255,0.2); border-radius: 15px; display: flex; flex-direction: column; gap: 1.5rem; background: rgba(0,243,255,0.015); }
+        .ai-node { background: rgba(0,0,0,0.5); padding: 1.5rem; border: 1px solid var(--neon-cyan); border-radius: 12px; transition: 0.35s; }
+        .ai-node:hover { transform: translateY(-3px); box-shadow: var(--neon-cyan-glow); }
+        .ai-node-gold { border-color: var(--neon-gold); }
+        .ai-node-gold:hover { box-shadow: var(--neon-gold-glow); }
+        .ai-node-gold h4 { color: var(--neon-gold); }
+        .ai-node h4 { font-family: 'Space Grotesk'; font-size: 1.15rem; margin-bottom: 0.5rem; text-transform: uppercase; }
+
+        /* Image box */
+        .image-box { width: 100%; border-radius: 15px; overflow: hidden; }
+        .image-box img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* Deco */
+        .deco-line { height: 3px; border-radius: 3px; margin: 1rem auto; }
+        .deco-line-cyan { background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent); width: 200px; box-shadow: 0 0 8px var(--neon-cyan); }
+        .deco-line-gold { background: linear-gradient(90deg, transparent, var(--neon-gold), transparent); width: 200px; box-shadow: 0 0 8px var(--neon-gold); }
+        .neon-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border-radius: 30px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Archetype text cards */
+        .archetype-card { background: rgba(5,7,10,0.8); border-radius: 15px; padding: 2rem 1.5rem; text-align: center; transition: 0.35s; }
+        .archetype-card:hover { transform: translateY(-5px); }
+        .archetype-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; margin-bottom: 0.7rem; }
+        .archetype-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; }
+        .archetype-icon { font-size: 2.5rem; margin-bottom: 0.8rem; display: block; }
+
+        /* Nav dots */
+        .nav-dots { position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 12px; z-index: 100; align-items: center; }
+        .dot { width: 14px; height: 16px; background: var(--text-muted); opacity: 0.25; cursor: pointer; transition: 0.3s; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+        .dot.active { opacity: 1; background: var(--neon-cyan); filter: drop-shadow(0 0 6px var(--neon-cyan)); transform: scale(1.4); }
+        .dot:hover { opacity: 0.6; }
+
+        /* CTA Button */
+        .cta-btn { display: inline-flex; align-items: center; gap: 10px; padding: 16px 40px; border-radius: 50px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none; transition: 0.4s; cursor: pointer; border: none; }
+        .cta-btn-cyan { background: linear-gradient(135deg, var(--neon-cyan), #00b8d4); color: var(--bg-dark); box-shadow: 0 0 20px rgba(0,243,255,0.4); }
+        .cta-btn-cyan:hover { box-shadow: 0 0 35px rgba(0,243,255,0.7); transform: translateY(-3px) scale(1.03); }
+        .cta-btn-gold { background: linear-gradient(135deg, var(--neon-gold), #ff9900); color: var(--bg-dark); box-shadow: 0 0 20px rgba(255,204,0,0.4); }
+        .cta-btn-gold:hover { box-shadow: 0 0 35px rgba(255,204,0,0.7); transform: translateY(-3px) scale(1.03); }
+
+        /* Confetti canvas */
+        #canvas-confetti { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
         
-        .profile-card-overlay {
-            position: absolute; top:0; left:0; width:100%; height:100%; z-index: -1;
-            background: linear-gradient(to top, rgba(10,12,18,0.95) 10%, rgba(10,12,18,0.4) 60%, transparent 100%);
-            transition: 0.6s;
-        }
-
-        .profile-card:hover { transform: translateY(-10px); border-color: rgba(0,243,255,0.4); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
-        .profile-card:hover .profile-card-bg { transform: scale(1.15); }
-        .profile-card:hover .profile-card-overlay { background: linear-gradient(to top, rgba(10,12,18,0.95) 10%, rgba(0,243,255,0.2) 60%, transparent 100%); }
-        
-        .profile-content { position: relative; z-index: 5; margin-top: auto; }
-        .profile-card h4 { font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--text-main); text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-        .profile-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
-        .tag { background: rgba(0,243,255,0.1); color: var(--neon-cyan); padding: 8px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(0,243,255,0.2); backdrop-filter: blur(5px); }
-
-        /* === SLIDE 6: Cierre / Gran Final === */
-        .slide-6 .bg-overlay { background: radial-gradient(circle at top, rgba(10,14,25,1) 0%, var(--bg-dark) 100%); }
-        #canvas-confetti { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-        .massive-counter-container { position: relative; z-index: 10; margin: 3rem 0; }
-        .massive-counter { font-size: 8rem; color: var(--neon-cyan); text-shadow: 5px 5px 10px rgba(0,0,0,1), var(--neon-cyan-glow); font-family: 'Limelight', cursive; line-height: 1; }
-        .unit-label { font-size: 2rem; color: var(--neon-gold); font-weight: 600; letter-spacing: 3px; display: block; margin-top: -10px; text-shadow: 2px 2px 5px rgba(0,0,0,1); }
-        .closing-text { font-size: 2.5rem; font-weight: 400; color: var(--text-main); }
-
-        /* === Controles de Navegación Globales === */
-        .nav-dots { position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 15px; z-index: 100; align-items: center;}
-        .dot { width: 16px; height: 18px; background: var(--text-muted); opacity: 0.3; cursor: pointer; transition: 0.3s; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
-        .dot.active { opacity: 1; background: var(--neon-cyan); filter: drop-shadow(0 0 8px var(--neon-cyan)); transform: scale(1.4); }
-        
-        .scroll-down { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 20; animation: bounce 2s infinite cubic-bezier(0.2, 0.8, 0.2, 1); opacity: 0.7; cursor: pointer; }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); } 40% { transform: translateY(-15px) translateX(-50%); } 60% { transform: translateY(-7px) translateX(-50%); } }
+        /* Platform badges */
+        .platform-badge { display: inline-flex; align-items: center; gap: 10px; padding: 15px 25px; border-radius: 12px; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; transition: 0.35s; }
+        .platform-badge:hover { transform: translateY(-3px); }
     </style>
 </head>
 <body>
 
-    <!-- Partículas de Fondo Global -->
     <canvas id="particles-bg"></canvas>
 
-    <!-- Navegación Lateral -->
+    <!-- Mascota -->
+    <div id="mascot-container">
+        <div style="position: relative;">
+            <div id="mascot-bubble">
+                <p id="mascot-text">¡Hola! Soy tu asistente de AI-Bank.</p>
+            </div>
+            <img src="imagenes/mascot.jpeg" alt="Mascota" class="mascot-img" onerror="this.style.display='none'">
+        </div>
+    </div>
+
+    <!-- Nav -->
     <div class="nav-dots">
         <div class="dot active" onclick="scrollToSlide(0)"></div>
         <div class="dot" onclick="scrollToSlide(1)"></div>
@@ -288,278 +191,426 @@
         <div class="dot" onclick="scrollToSlide(3)"></div>
         <div class="dot" onclick="scrollToSlide(4)"></div>
         <div class="dot" onclick="scrollToSlide(5)"></div>
+        <div class="dot" onclick="scrollToSlide(6)"></div>
+        <div class="dot" onclick="scrollToSlide(7)"></div>
+        <div class="dot" onclick="scrollToSlide(8)"></div>
+        <div class="dot" onclick="scrollToSlide(9)"></div>
     </div>
 
-    <!-- Contenedor Principal Scroll Snap -->
     <div class="slider-container" id="slider">
 
-        <!-- SLIDE 1: Portada -->
-        <section class="slide slide-1" id="s1">
-            <img src="imagenes/balon.png" alt="Fondo Balon" class="bg-img" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\'/%3E'; this.style.backgroundColor='#111'">
+        <!-- ======== SLIDE 1: PORTADA ======== -->
+        <section class="slide slide-1" id="s1" data-mascot="¡Bienvenidos a la presentación de AI-Bank para la Copa Mundial 2026!">
             <div class="bg-overlay"></div>
-            
             <div class="container">
-                <h1 class="title-giant fade-up">AI-Bank <span class="neon-gold">mAiles</span></h1>
-                <h2 class="subtitle fade-up delay-1">El Pitazo Inicial de la Fidelización VIP</h2>
-                <div class="fade-up delay-2">
-                    <button class="btn-neon pulse-anim" onclick="scrollToSlide(1)">Iniciar Experiencia</button>
+                <div class="neon-badge fade-up" style="background: rgba(0,243,255,0.08); border: 1px solid var(--neon-cyan); color: var(--neon-cyan); margin-bottom: 1.5rem;">
+                    🏟️ Copa del Mundo FIFA 2026
                 </div>
-            </div>
-            
-            <div class="scroll-down" onclick="scrollToSlide(1)">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </div>
-        </section>
+                <h1 class="title-giant fade-up delay-1">AI-BANK</h1>
+                <h2 class="subtitle fade-up delay-2" style="font-size: 1.4rem; margin-bottom: 0.5rem; color: var(--neon-gold); text-shadow: var(--neon-gold-glow);">Pronósticos Inteligentes. Recompensas Reales.</h2>
+                <div class="deco-line deco-line-cyan fade-up delay-2"></div>
 
-        <!-- SLIDE 2: El Desafío -->
-        <section class="slide slide-2" id="s2">
-            <div class="split-layout">
-                <div class="split-panel split-left">
-                    <img src="imagenes/triste.png" alt="Fidelización Pasiva" class="split-img" onerror="this.style.backgroundColor='#1a1a1a'">
-                    <div class="bg-overlay"></div>
-                    <div class="content fade-up">
-                        <h2>Fidelización <br>Tradicional</h2>
-                        <p>Interacción pasiva, premios genéricos y clientes en la banca de suplentes.</p>
+                <div class="grid-cols-4 fade-up delay-3" style="margin: 1.5rem 0;">
+                    <div class="stat-box">
+                        <div class="stat-number neon-cyan" data-count="3">0</div>
+                        <div class="stat-label">Modelos IA</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number neon-gold" data-count="48">0</div>
+                        <div class="stat-label">Partidos Fase Grupos</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" style="color: var(--neon-magenta);" data-count="0">∞</div>
+                        <div class="stat-label">mAiles</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" style="color: var(--neon-green);" data-count="104">0</div>
+                        <div class="stat-label">Partidos Totales</div>
                     </div>
                 </div>
-                
-                <div class="pitch-line scale-in"></div>
-                <div class="pitch-circle scale-in delay-1"></div>
-                <div class="vs-badge scale-in delay-2">VS</div>
-                
-                <div class="split-panel split-right">
-                    <img src="imagenes/feliz.png" alt="Celebración Game" class="split-img" onerror="this.style.backgroundColor='#0a0f1a'">
-                    <div class="bg-overlay"></div>
-                    <div class="content fade-up delay-1">
-                        <h2 class="neon-cyan">Engagement <br>Mundial 2026</h2>
-                        <p>Pronósticos en tiempo real impulsados por IA que ponen al cliente en la cancha.</p>
-                    </div>
+
+                <h3 class="fade-up delay-4" style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-muted);">El Equipo</h3>
+                <div class="grid-cols-4 fade-up delay-5">
+                    <div class="integrante-card"><h4>Isaac</h4><p>Leader</p></div>
+                    <div class="integrante-card"><h4>Paola & Dilan</h4><p>Developers</p></div>
+                    <div class="integrante-card"><h4>Juan & Sebastian</h4><p>Data Eng & QA</p></div>
+                    <div class="integrante-card"><h4>Dayana</h4><p>CI/CD & Infra</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 3: Motor IA -->
-        <section class="slide slide-3" id="s3">
-            <img src="imagenes/dashboard.png" alt="Dashboard BG" class="bg-img" style="filter: blur(8px);" onerror="this.src=''; this.style.backgroundColor='#05070a'">
+        <!-- ======== SLIDE 2: VIDEO ======== -->
+        <section class="slide slide-2" id="s2" data-mascot="Observa nuestra aplicación en acción. ¡Dale al play!">
             <div class="bg-overlay"></div>
+            <div class="container">
+                <h2 class="section-title fade-up">Nuestra App en Acción</h2>
+                <p class="fade-up delay-1" style="color: var(--text-muted); margin-bottom: 0.5rem; font-size: 1.1rem;">Mira cómo AI-Bank transforma la experiencia de fidelización bancaria</p>
+                <div class="deco-line deco-line-cyan fade-up delay-1"></div>
+                <div class="video-container scale-in delay-2">
+                    <video controls muted>
+                        <source src="imagenes/video.mov">
+                    </video>
+                </div>
+            </div>
+        </section>
 
-            <div class="tactical-pitch scale-in delay-1"></div>
-            <div class="container" style="max-width: 1400px; width: 100%;">
-                <h2 class="scoreboard-title fade-up">AI NETWORKING</h2>
-                <h3 class="scoreboard-subtitle fade-up delay-1">Motor Predictivo IA</h3>
+        <!-- ======== SLIDE 3: LÓGICA DE NEGOCIO ======== -->
+        <section class="slide slide-3" id="s3" data-mascot="La lógica del negocio concentra todo el ecosistema de IA con los beneficios mAiles.">
+            <div class="bg-overlay"></div>
+            <div class="container">
+                <h2 class="section-title fade-up">Lógica de Negocio</h2>
+                <div class="deco-line deco-line-gold fade-up delay-1"></div>
                 
-                <div class="ai-flow-container">
-                    <!-- Flujo Entrada Izquierda -->
-                    <div class="data-side left">
-                        <div class="glass-data-panel fade-up delay-1">
-                            <span class="micro-label">INPUT 01</span>
-                            <h4>Datos Financieros</h4>
-                            <p>Análisis de transacciones recurrentes, pagos, y perfil de gasto.</p>
+                <div style="display: flex; gap: 2rem; align-items: stretch; text-align: left; margin-top: 1rem;" class="fade-up delay-1">
+                    <div class="glass-panel" style="flex: 1; border-color: rgba(0,243,255,0.3); padding: 1.8rem; display: flex; flex-direction: column;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
+                            <span style="font-size: 1.5rem;">🏦</span>
+                            <h3 class="neon-cyan" style="font-size: 1.25rem;">Ecosistema AI-Bank</h3>
                         </div>
-                        <div class="glass-data-panel fade-up delay-2">
-                            <span class="micro-label">INPUT 02</span>
-                            <h4>Comportamiento</h4>
-                            <p>Geolocalización, hábitos digitales y uso de banca móvil.</p>
+                        <p style="margin-bottom: 0.8rem; color: var(--text-muted); font-size: 1rem; line-height: 1.7;">
+                            AI-Bank fortalece la <strong style="color: var(--neon-cyan);">fidelización</strong> de clientes mediante una app exclusiva para pronósticos del <strong style="color: var(--neon-gold);">Mundial 2026</strong>.
+                        </p>
+                        <p style="margin-bottom: 0.8rem; color: var(--text-muted); font-size: 1rem; line-height: 1.7;">
+                            Integra un <strong style="color: var(--neon-magenta);">Motor de IA</strong> que analiza datos históricos de selecciones y genera recomendaciones inteligentes de pronóstico.
+                        </p>
+                        <div style="display: flex; gap: 1rem; margin-bottom: 0.8rem;">
+                            <div style="flex:1; background: rgba(0,243,255,0.06); border: 1px solid rgba(0,243,255,0.15); border-radius: 8px; padding: 0.6rem; text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--neon-cyan); font-family: 'Space Grotesk';">104</div>
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Partidos</div>
+                            </div>
+                            <div style="flex:1; background: rgba(255,204,0,0.06); border: 1px solid rgba(255,204,0,0.15); border-radius: 8px; padding: 0.6rem; text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--neon-gold); font-family: 'Space Grotesk';">48</div>
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Selecciones</div>
+                            </div>
+                            <div style="flex:1; background: rgba(255,45,149,0.06); border: 1px solid rgba(255,45,149,0.15); border-radius: 8px; padding: 0.6rem; text-align: center;">
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--neon-magenta); font-family: 'Space Grotesk';">3</div>
+                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Países Sede</div>
+                            </div>
+                        </div>
+                        <div style="background: rgba(255,204,0,0.08); border: 1px solid rgba(255,204,0,0.3); border-radius: 10px; padding: 0.8rem; margin-top: auto;">
+                            <p style="color: var(--neon-gold); font-size: 0.95rem; line-height: 1.5; font-weight: 800;">
+                                🏆 Cliente acierta → gana <strong>mAiles</strong> → canjea recompensas reales
+                            </p>
+                        </div>
+                    </div>
+                    <div style="flex: 1.2; border: 1px solid var(--neon-gold); border-radius: 15px; overflow: hidden; box-shadow: var(--neon-gold-glow); display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); padding: 0.5rem;">
+                        <img src="imagenes/logica_negocio.png" alt="Lógica de Negocio" style="width: 100%; height: 100%; object-fit: contain; border-radius: 10px;" onerror="this.src='imagenes/business_logic.png'">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== SLIDE 4: ARQUITECTURA ======== -->
+        <section class="slide slide-4" id="s4" data-mascot="Un vistazo a nuestra arquitectura robusta y escalable en la nube.">
+            <div class="bg-overlay"></div>
+            <div class="container">
+                <h2 class="section-title fade-up">Arquitectura</h2>
+                <div class="deco-line deco-line-cyan fade-up delay-1"></div>
+                <p class="fade-up delay-1" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem;">Infraestructura cloud-native escalable y segura</p>
+                
+                <div class="image-box scale-in delay-2" style="height: 480px; border: 2px solid rgba(0,243,255,0.2); background: rgba(0,0,0,0.3); border-radius: 15px;">
+                    <img src="imagenes/Arquitectura.png" alt="Arquitectura del Proyecto" style="border-radius: 13px;" onerror="this.style.display='none'">
+                </div>
+
+                <div style="display: flex; justify-content: center; gap: 1.2rem; margin-top: 1.2rem; flex-wrap: wrap;" class="fade-up delay-3">
+                    <div class="neon-badge" style="background: rgba(0,243,255,0.08); border: 1px solid rgba(0,243,255,0.25); color: var(--neon-cyan);">⚡ Supabase Realtime</div>
+                    <div class="neon-badge" style="background: rgba(255,204,0,0.08); border: 1px solid rgba(255,204,0,0.25); color: var(--neon-gold);">🐍 FastAPI Backend</div>
+                    <div class="neon-badge" style="background: rgba(255,45,149,0.08); border: 1px solid rgba(255,45,149,0.25); color: var(--neon-magenta);">🚀 Netlify Deploy</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== SLIDE 5: FLUJO LOGICA NEGOCIO (Frontend) ======== -->
+        <section class="slide slide-5" id="s5" data-mascot="Este diagrama muestra cómo fluye la lógica del negocio desde el cliente hasta las recompensas.">
+            <div class="bg-overlay"></div>
+            <div class="container">
+                <h2 class="section-title fade-up">Flujo de la Lógica del Negocio</h2>
+                <div class="deco-line deco-line-gold fade-up delay-1"></div>
+                <p class="fade-up delay-1" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem;">Cómo se conecta cada componente del ecosistema AI-Bank</p>
+                
+                <div class="image-box scale-in delay-2" style="height: 500px; border: 2px solid rgba(255,204,0,0.25); background: rgba(0,0,0,0.3); border-radius: 15px; box-shadow: var(--neon-gold-glow);">
+                    <img src="imagenes/Frontend.png" alt="Flujo de la Lógica del Negocio" style="border-radius: 13px;" onerror="this.style.display='none'">
+                </div>
+
+                <div style="display: flex; justify-content: center; gap: 1.2rem; margin-top: 1.2rem; flex-wrap: wrap;" class="fade-up delay-3">
+                    <div class="neon-badge" style="background: rgba(0,243,255,0.08); border: 1px solid rgba(0,243,255,0.25); color: var(--neon-cyan);">👤 Cliente</div>
+                    <div class="neon-badge" style="background: rgba(255,204,0,0.08); border: 1px solid rgba(255,204,0,0.25); color: var(--neon-gold);">🧠 Motor IA</div>
+                    <div class="neon-badge" style="background: rgba(255,45,149,0.08); border: 1px solid rgba(255,45,149,0.25); color: var(--neon-magenta);">🎯 Pronóstico</div>
+                    <div class="neon-badge" style="background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.25); color: var(--neon-green);">🏆 Recompensas</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== SLIDE 6: VALOR DE LA IA ======== -->
+        <section class="slide slide-6" id="s6" data-mascot="Nuestros modelos utilizan algoritmos avanzados como Random Forest y GradientBoosting.">
+            <div class="bg-overlay"></div>
+            <div class="container">
+                <h2 class="section-title fade-up">Valor de la IA</h2>
+                <div class="deco-line deco-line-cyan fade-up delay-1"></div>
+                
+                <div class="ai-flow mt-3">
+                    <div class="grid-cols-2">
+                        <div class="ai-node fade-up delay-1" style="text-align: center;">
+                            <img src="imagenes/cerebro.png" style="width: 65px; height: 65px; object-fit: contain; margin-bottom: 8px;" alt="">
+                            <h4 class="neon-cyan">Segmentación de Clientes</h4>
+                            <p style="margin-bottom: 0.8rem;">Análisis de historial crediticio con <strong style="color: var(--neon-cyan);">K-Means RFM</strong>. Premios extras para los mejores clientes.</p>
+                            <div class="neon-badge" style="background: rgba(0,243,255,0.06); border: 1px solid rgba(0,243,255,0.2); color: var(--neon-cyan); font-size: 0.75rem;">📊 Clusterización Inteligente</div>
+                        </div>
+                        <div class="ai-node ai-node-gold fade-up delay-2" style="text-align: center;">
+                            <img src="imagenes/boost.png" style="width: 65px; height: 65px; object-fit: contain; margin-bottom: 8px;" alt="">
+                            <h4>Modelo de Predicción</h4>
+                            <p style="margin-bottom: 0.8rem;"><strong style="color: var(--neon-gold);">Random Forest</strong>, <strong style="color: var(--neon-gold);">Regresión Logística</strong> y <strong style="color: var(--neon-gold);">GradientBoosting</strong>.</p>
+                            <div class="neon-badge" style="background: rgba(255,204,0,0.06); border: 1px solid rgba(255,204,0,0.2); color: var(--neon-gold); font-size: 0.75rem;">🎯 Precisión Optimizada</div>
                         </div>
                     </div>
                     
-                    <!-- Linea Neo Conectora Izquierda -->
-                    <div class="data-stream delay-3">
-                        <span class="micro-label" style="top:-30px; left:50%; transform:translateX(-50%);">10K PERFILES</span>
+                    <div class="ai-node fade-up delay-3" style="text-align: center; border-color: var(--neon-magenta);">
+                        <h4 style="color: var(--neon-magenta);">🤖 Asistente Virtual IA</h4>
+                        <p>Alimentado con toda la información de la app para <strong style="color: var(--neon-magenta);">resolver dudas</strong> y asistir al usuario <strong style="color: var(--neon-magenta);">en tiempo real</strong>.</p>
+                    </div>
+
+                    <div class="grid-cols-3 fade-up delay-4">
+                        <div class="stat-box" style="background: rgba(0,243,255,0.04); border: 1px solid rgba(0,243,255,0.12); border-radius: 10px;">
+                            <div class="stat-number neon-cyan" style="font-size: 2rem;">3</div>
+                            <div class="stat-label">Modelos Entrenados</div>
+                        </div>
+                        <div class="stat-box" style="background: rgba(255,204,0,0.04); border: 1px solid rgba(255,204,0,0.12); border-radius: 10px;">
+                            <div class="stat-number neon-gold" style="font-size: 2rem;">+10K</div>
+                            <div class="stat-label">Datos de Partidos</div>
+                        </div>
+                        <div class="stat-box" style="background: rgba(255,45,149,0.04); border: 1px solid rgba(255,45,149,0.12); border-radius: 10px;">
+                            <div class="stat-number" style="font-size: 2rem; color: var(--neon-magenta);">24/7</div>
+                            <div class="stat-label">Asistente Activo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== SLIDE 6: ARQUETIPOS (solo texto) ======== -->
+        <section class="slide slide-6" id="s6" data-mascot="Adaptamos los beneficios basándonos en encuestas y análisis de mercado.">
+            <div class="bg-overlay"></div>
+            <div class="container">
+                <h2 class="section-title fade-up">Arquetipos de Usuarios</h2>
+                <div class="deco-line deco-line-gold fade-up delay-1"></div>
+                <p class="fade-up delay-1" style="font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--text-muted);">Clasificamos a los usuarios según encuestas para premios personalizados</p>
+
+                <div class="grid-cols-3 fade-up delay-2">
+                    <div class="archetype-card" style="border: 1px solid rgba(255,204,0,0.3);">
+                        <span class="archetype-icon">⚡</span>
+                        <h3 style="color: var(--neon-gold);">Perfil Activo</h3>
+                        <p>Participan <strong style="color: var(--neon-gold);">frecuentemente</strong> en los pronósticos, buscan la emoción del juego y <strong style="color: var(--neon-gold);">acumulan mAiles</strong> activamente con cada partido.</p>
+                    </div>
+                    <div class="archetype-card" style="border: 1px solid rgba(0,243,255,0.3);">
+                        <span class="archetype-icon">💡</span>
+                        <h3 style="color: var(--neon-cyan);">Perfil Ocasional</h3>
+                        <p>Necesitan <strong style="color: var(--neon-cyan);">incentivos adicionales</strong> de la IA para decidirse a participar. La recomendación del modelo es clave para su enganche.</p>
+                    </div>
+                    <div class="archetype-card" style="border: 1px solid rgba(255,45,149,0.3);">
+                        <span class="archetype-icon">🔥</span>
+                        <h3 style="color: var(--neon-magenta);">Súper Fans</h3>
+                        <p>Utilizan <strong style="color: var(--neon-magenta);">todos los recursos IA</strong>, participan en cada partido y reclaman los <strong style="color: var(--neon-magenta);">premios de mayor valor</strong> del ecosistema.</p>
+                    </div>
+                </div>
+
+                <!-- Quick insight stats -->
+                <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem;" class="fade-up delay-3">
+                    <div class="stat-box">
+                        <div class="stat-number neon-gold" style="font-size: 2rem;">60%</div>
+                        <div class="stat-label">Perfil Activo</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number neon-cyan" style="font-size: 2rem;">25%</div>
+                        <div class="stat-label">Ocasional</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" style="font-size: 2rem; color: var(--neon-magenta);">15%</div>
+                        <div class="stat-label">Súper Fans</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== SLIDE 7: QA & UX/UI ======== -->
+        <section class="slide slide-7" id="s7" data-mascot="Nos centramos en código limpio y una experiencia de usuario perfecta.">
+            <div class="bg-overlay"></div>
+            <div class="container">
+                <h2 class="section-title fade-up">QA & UX/UI</h2>
+                <div class="deco-line deco-line-cyan fade-up delay-1"></div>
+                
+                <div class="grid-cols-2 mt-3">
+                    <!-- QA Card -->
+                    <div class="tech-card fade-up delay-1" style="border-color: rgba(0,243,255,0.3); text-align: left;">
+                        <h3 class="neon-cyan" style="text-align: center;">Quality Assurance</h3>
+                        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 1rem;">
+                            Integración de análisis estático de código mediante <strong style="color: var(--neon-cyan);">SonarQube</strong>, garantizando buenas prácticas, detección de vulnerabilidades y mantenibilidad del código.
+                        </p>
+                        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
+                            <span class="neon-badge" style="background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.25); color: var(--neon-green); font-size: 0.75rem;">✓ Code Smells</span>
+                            <span class="neon-badge" style="background: rgba(0,243,255,0.08); border: 1px solid rgba(0,243,255,0.25); color: var(--neon-cyan); font-size: 0.75rem;">✓ Security</span>
+                            <span class="neon-badge" style="background: rgba(255,204,0,0.08); border: 1px solid rgba(255,204,0,0.25); color: var(--neon-gold); font-size: 0.75rem;">✓ Coverage</span>
+                        </div>
                     </div>
                     
-                    <!-- Núcleo Central -->
-                    <div class="brain-wrapper scale-in delay-2" style="margin: 0; width: 320px;">
-                        <div class="heartbeat-glow"></div>
-                        <div class="orbit orbit-1"><div class="node"></div></div>
-                        <div class="orbit orbit-2"><div class="node"></div></div>
-                        <img src="imagenes/cerebro.png" alt="Cerebro IA" class="brain-img" style="width: 200px;" onerror="this.src=''; this.style.display='none'">
-                    </div>
-                    
-                    <!-- Linea Neo Conectora Derecha -->
-                    <div class="data-stream right-stream delay-3">
-                        <span class="micro-label" style="top:-30px; left:50%; transform:translateX(-50%); border-color:var(--neon-gold); color:var(--neon-gold); box-shadow:var(--neon-gold-glow);">PROCESAMIENTO</span>
-                    </div>
-
-                    <!-- Flujo Salida Derecha -->
-                    <div class="data-side right">
-                        <div class="glass-data-panel fade-up delay-4">
-                            <span class="micro-label">OUTPUT AI</span>
-                            <h4 style="color: var(--neon-gold);">Análisis Categórico</h4>
-                            <p>Procesamiento avanzado para generar predicciones funcionales customizadas.</p>
-                        </div>
-                        <div class="glass-data-panel fade-up delay-4">
-                            <span class="micro-label">TARGET</span>
-                            <h4 style="color: var(--neon-gold);">Estrategia Inteligente</h4>
-                            <p>Despliegue de recompensas y beneficios únicos por cliente.</p>
-                        </div>
+                    <!-- UX Card -->
+                    <div class="tech-card fade-up delay-2" style="text-align: left;">
+                        <h3 style="text-align: center;">UX / UI Experience</h3>
+                        <ul style="list-style: none; line-height: 2.2; padding: 0.5rem 1rem; color: var(--text-muted); font-size: 1.05rem;">
+                            <li><strong class="neon-gold" style="font-size: 1.1rem;">✓</strong> Simplificación en la carga de pantalla principal</li>
+                            <li><strong class="neon-gold" style="font-size: 1.1rem;">✓</strong> Guía interactiva incorporada para el usuario</li>
+                            <li><strong class="neon-gold" style="font-size: 1.1rem;">✓</strong> Colores estéticos basados en MoodBoard</li>
+                            <li><strong class="neon-gold" style="font-size: 1.1rem;">✓</strong> Diseño Mobile-First responsivo</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 4: Sistema de Recompensas -->
-        <section class="slide slide-4" id="s4">
+        <!-- ======== SLIDE 8: STACK TECNOLÓGICO ======== -->
+        <section class="slide slide-8" id="s8" data-mascot="Tecnologías modernas, eficientes y seguras dominan nuestro proyecto.">
             <div class="bg-overlay"></div>
-            
-            <div class="container">
-                <h2 class="title-giant fade-up" style="font-size: 3rem;">Goleada de Recompensas</h2>
-                <p class="fade-up delay-1" style="color: var(--text-muted); font-size: 1.2rem; margin-top: 10px;">Acumula mAiles en cada partido pronosticado.</p>
+            <div class="container" style="position: relative; z-index: 10;">
+                <h2 class="section-title fade-up" style="font-size: 3rem;">Stack Tecnológico</h2>
+                <div class="deco-line deco-line-gold fade-up delay-1"></div>
+                <p class="fade-up delay-1" style="font-size: 1.05rem; margin-bottom: 2rem; color: var(--text-muted);">Las tecnologías que impulsan AI-Bank</p>
 
-                <div class="cards-grid">
-                    <!-- Tarjeta 1 -->
-                    <div class="flip-card fade-up delay-2">
-                        <div class="flip-inner">
-                            <div class="flip-front">
-                                <img src="imagenes/insignia.png" class="card-bg-img" onerror="this.src=''">
-                                <h3>Gol Simple</h3>
-                            </div>
-                            <div class="flip-back">
-                                <h3 class="neon-cyan">Gol Simple</h3>
-                                <div class="points">+500<br><span style="font-size:1rem; font-weight:400">mAiles</span></div>
-                                <p>Recompensa base por acertar el resultado del encuentro.</p>
-                            </div>
-                        </div>
+                <div class="grid-cols-2 fade-up delay-2" style="gap: 1.5rem;">
+                    <div class="glass-panel" style="text-align: center; border-color: #61dafb; padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.3rem;">⚛️</div>
+                        <h4 style="color: #61dafb; font-size: 1.3rem; margin-bottom: 6px; font-family: 'Space Grotesk', sans-serif; font-weight: 700;">React</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Web App Responsiva con hooks, context y componentes dinámicos</p>
                     </div>
-                    <!-- Tarjeta 2 -->
-                    <div class="flip-card fade-up delay-3">
-                        <div class="flip-inner">
-                            <div class="flip-front">
-                                <img src="imagenes/boost.png" class="card-bg-img" onerror="this.src=''">
-                                <h3>Racha Goleadora</h3>
-                            </div>
-                            <div class="flip-back">
-                                <h3 class="neon-cyan">Racha Goleadora</h3>
-                                <div class="points">Multiplicador<br><span style="font-size:3rem" class="neon-gold">X2</span></div>
-                                <p>Premio a la consistencia participativa a lo largo del torneo.</p>
-                            </div>
-                        </div>
+                    <div class="glass-panel" style="text-align: center; border-color: #3ecf8e; padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.3rem;">🗄️</div>
+                        <h4 style="color: #3ecf8e; font-size: 1.3rem; margin-bottom: 6px; font-family: 'Space Grotesk', sans-serif; font-weight: 700;">Supabase</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Auth, PostgreSQL y Realtime en tiempo real</p>
                     </div>
-                    <!-- Tarjeta 3 -->
-                    <div class="flip-card fade-up delay-4">
-                        <div class="flip-inner">
-                            <div class="flip-front">
-                                <img src="imagenes/ticket.png" class="card-bg-img" onerror="this.src=''">
-                                <h3>VIP de Campeonato</h3>
-                            </div>
-                            <div class="flip-back">
-                                <h3 class="neon-gold">VIP Oro</h3>
-                                <div class="points" style="font-size: 1.8rem;">Status Unlocked</div>
-                                <p>Acceso anticipado a entradas, experiencias exclusivas y mejores tasas.</p>
-                            </div>
-                        </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.2rem;" class="fade-up delay-3">
+                    <div class="glass-panel" style="text-align: center; border-color: rgba(255,255,255,0.25); padding: 1.2rem 0.8rem;">
+                        <div style="font-size: 1.6rem;">🐙</div>
+                        <h4 style="color: #fff; font-size: 0.95rem; font-family: 'Space Grotesk', sans-serif;">GitHub</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">Gobierno & CI</p>
                     </div>
+                    <div class="glass-panel" style="text-align: center; border-color: #00d1b2; padding: 1.2rem 0.8rem;">
+                        <div style="font-size: 1.6rem;">🚀</div>
+                        <h4 style="color: #00d1b2; font-size: 0.95rem; font-family: 'Space Grotesk', sans-serif;">Netlify</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">Producción & CD</p>
+                    </div>
+                    <div class="glass-panel" style="text-align: center; border-color: #009688; padding: 1.2rem 0.8rem;">
+                        <div style="font-size: 1.6rem;">🐍</div>
+                        <h4 style="color: #009688; font-size: 0.95rem; font-family: 'Space Grotesk', sans-serif;">FastAPI</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">Motor IA</p>
+                    </div>
+                    <div class="glass-panel" style="text-align: center; border-color: #e535ab; padding: 1.2rem 0.8rem;">
+                        <div style="font-size: 1.6rem;">📧</div>
+                        <h4 style="color: #e535ab; font-size: 0.95rem; font-family: 'Space Grotesk', sans-serif;">EmailJS</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">Notificaciones</p>
+                    </div>
+                </div>
+
+                <div class="fade-up delay-4" style="margin-top: 1.5rem; background: rgba(255,204,0,0.08); display: inline-flex; align-items: center; gap: 10px; padding: 10px 25px; border-radius: 30px; border: 1px solid rgba(255,204,0,0.3);">
+                    <span style="font-size: 1.2rem;">🏆</span>
+                    <p style="color: var(--neon-gold); font-size: 0.95rem; font-weight: 800; letter-spacing: 1px;">CONSUMO OFICIAL: API FIFA WORLD CUP 2026</p>
                 </div>
             </div>
         </section>
 
-        <!-- SLIDE 5: VIP Lounge -->
-        <section class="slide slide-5" id="s5">
-            <img src="imagenes/personas.png" alt="Personas BG" class="bg-img" onerror="this.src=''; this.style.backgroundColor='#030508'">
+        <!-- ======== SLIDE 10: VISITA NUESTRA APP (FINAL) ======== -->
+        <section class="slide slide-10" id="s10" data-mascot="¡Descarga nuestra app o visítanos en la web! Somos multiplataforma 🎉">
             <div class="bg-overlay"></div>
-
-            <div class="container">
-                <h2 class="title-giant fade-up" style="font-size: 3rem;">Plantilla VIP Personalizada</h2>
-                <p class="fade-up delay-1" style="color: var(--text-muted); font-size: 1.2rem; margin-top: 10px;">La IA actúa como DT, segmentando y adaptando los beneficios para cada estilo de vida.</p>
-
-                <div class="profiles-grid">
-                    <div class="profile-card fade-up delay-2 c-left">
-                        <div class="profile-card-bg"></div>
-                        <div class="profile-card-overlay"></div>
-                        <div class="profile-content">
-                            <h4>El Hincha Viajero</h4>
-                            <p>Alto perfil viajero e internacional.</p>
-                            <span class="tag">Viajes & Hospedaje</span>
-                        </div>
-                    </div>
-                    <div class="profile-card fade-up delay-3 c-center">
-                        <div class="profile-card-bg"></div>
-                        <div class="profile-card-overlay"></div>
-                        <div class="profile-content">
-                            <h4>El Hincha Digital</h4>
-                            <p>Adopción temprana de apps y plataformas.</p>
-                            <span class="tag">Streaming & Tech</span>
-                        </div>
-                    </div>
-                    <div class="profile-card fade-up delay-4 c-right">
-                        <div class="profile-card-bg"></div>
-                        <div class="profile-card-overlay"></div>
-                        <div class="profile-content">
-                            <h4>El Hincha Local</h4>
-                            <p>Preferencias por juntadas y eventos.</p>
-                            <span class="tag">Delivery & Gastronomía</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 6: Cierre -->
-        <section class="slide slide-6" id="s6">
-            <div class="bg-overlay"></div>
-            <!-- Canvas independiente para confetti -->
             <canvas id="canvas-confetti"></canvas>
             
-            <div class="container">
-                <h2 class="closing-text fade-up">Levantando la copa del <br><span class="neon-gold" style="font-weight: 700; font-size:3.5rem;">Engagement</span></h2>
-                
-                <div class="massive-counter-container scale-in delay-1">
-                    <div class="massive-counter" id="final-counter">0</div>
-                    <span class="unit-label">mAiles Generadas en el Torneo</span>
+            <div class="container" style="position: relative; z-index: 10;">
+                <div class="fade-up" style="font-size: 4rem; margin-bottom: 1rem;">🌐</div>
+                <h2 class="section-title fade-up delay-1" style="font-size: 3.2rem;">Visita Nuestra App</h2>
+                <div class="deco-line deco-line-cyan fade-up delay-1"></div>
+                <p class="fade-up delay-2" style="font-size: 1.3rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.7;">
+                    AI-Bank es <strong style="color: var(--neon-cyan);">multiplataforma</strong>. Accede desde la web o descarga la APK en tu dispositivo Android.
+                </p>
+
+                <!-- Platform badges -->
+                <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2.5rem; flex-wrap: wrap;" class="fade-up delay-3">
+                    <div class="platform-badge" style="background: rgba(0,243,255,0.08); border: 1px solid rgba(0,243,255,0.3); color: var(--neon-cyan);">
+                        <span style="font-size: 1.8rem;">🌐</span>
+                        <div style="text-align: left;">
+                            <div style="font-weight: 700; font-size: 1.1rem;">Web App</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Acceso desde cualquier navegador</div>
+                        </div>
+                    </div>
+                    <div class="platform-badge" style="background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.3); color: var(--neon-green);">
+                        <span style="font-size: 1.8rem;">📱</span>
+                        <div style="text-align: left;">
+                            <div style="font-weight: 700; font-size: 1.1rem;">APK Android</div>
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Descarga e instala directamente</div>
+                        </div>
+                    </div>
                 </div>
-                
-                <button class="btn-neon pulse-anim fade-up delay-3" onclick="scrollToSlide(0)" style="border-color: var(--neon-gold); color: var(--neon-gold); box-shadow: var(--neon-gold-glow);">Jugar de Nuevo</button>
+
+                <!-- CTA Buttons -->
+                <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;" class="fade-up delay-4">
+                    <a href="https://ai-bank-project.netlify.app" target="_blank" class="cta-btn cta-btn-cyan">
+                        🚀 Acceder a la Web App
+                    </a>
+                    <a href="#" class="cta-btn cta-btn-gold">
+                        📲 Descargar APK
+                    </a>
+                </div>
+
+                <p class="fade-up delay-5" style="margin-top: 2.5rem; color: var(--text-muted); font-size: 0.9rem;">Hecho con 💛 por el equipo AI-Bank &nbsp;|&nbsp; Copa del Mundo FIFA 2026</p>
             </div>
         </section>
 
     </div>
 
-    <!-- === Lógica JavaScript Vainilla === -->
     <script>
-        // 1. Manejo del Observador de Intersección (Para animaciones CSS in-view y navegadores de puntos)
         const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.dot');
         const sliderContainer = document.getElementById('slider');
-        let counterAnimated = false; // Solo animar el contador una vez por entrada
+        const mascotContainer = document.getElementById('mascot-container');
+        const mascotBubble = document.getElementById('mascot-bubble');
+        const mascotText = document.getElementById('mascot-text');
 
-        const observerOptions = {
-            root: sliderContainer,
-            threshold: 0.5 // Se dispara cuando el 50% de la seccion es visible
-        };
+        setTimeout(() => { mascotContainer.classList.add('visible'); }, 1200);
+
+        const observerOptions = { root: sliderContainer, threshold: 0.5 };
 
         const slideObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('in-view');
-                    
-                    // Actualizar Navigation Dots
                     const index = Array.from(slides).indexOf(entry.target);
                     dots.forEach(d => d.classList.remove('active'));
                     if(dots[index]) dots[index].classList.add('active');
 
-                    // Disparar Animación de Contador en Slide 6
-                    if (entry.target.id === 's6' && !counterAnimated) {
-                        animateCounter();
-                        triggerConfetti();
-                        counterAnimated = true;
+                    const mascotMsg = entry.target.getAttribute('data-mascot');
+                    if(mascotMsg) {
+                        mascotBubble.classList.remove('show');
+                        setTimeout(() => {
+                            mascotText.innerText = mascotMsg;
+                            mascotBubble.classList.add('show');
+                        }, 400);
+                    }
+
+                    // Confetti only on the final slide
+                    if (entry.target.id === 's10') triggerConfetti();
+
+                    // Animate counters on slide 1
+                    if (entry.target.id === 's1' && !entry.target.dataset.counted) {
+                        entry.target.dataset.counted = 'true';
+                        animateCounters(entry.target);
                     }
                 } else {
                     entry.target.classList.remove('in-view'); 
-                    if(entry.target.id === 's6') {
-                        counterAnimated = false; // permite re-animar si sale y entra
-                    }
                 }
             });
         }, observerOptions);
 
         slides.forEach(slide => slideObserver.observe(slide));
 
-        // Función para saltar a un slide específico
-        function scrollToSlide(index) {
-            slides[index].scrollIntoView({ behavior: 'smooth' });
-        }
+        function scrollToSlide(index) { slides[index].scrollIntoView({ behavior: 'smooth' }); }
 
-        // Soporte de navegación por teclado
         document.addEventListener('keydown', (e) => {
             const activeIndex = Array.from(dots).findIndex(d => d.classList.contains('active'));
             if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
@@ -569,7 +620,22 @@
             }
         });
 
-        // 2. Sistema Global de Partículas (Background Estético)
+        function animateCounters(slide) {
+            const counters = slide.querySelectorAll('.stat-number[data-count]');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                if (isNaN(target) || target === 0) return; // skip ∞
+                let current = 0;
+                const increment = Math.max(1, Math.floor(target / 25));
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) { current = target; clearInterval(timer); }
+                    counter.textContent = current;
+                }, 50);
+            });
+        }
+
+        // Lightweight particles - fewer particles for performance
         const canvasBg = document.getElementById('particles-bg');
         const ctxBg = canvasBg.getContext('2d');
         let particlesArray = [];
@@ -578,136 +644,73 @@
             canvasBg.width = window.innerWidth;
             canvasBg.height = window.innerHeight;
             particlesArray = [];
-            const numberOfParticles = (window.innerWidth * window.innerHeight) / 10000;
-            for (let i = 0; i < numberOfParticles; i++) {
+            const count = Math.min(60, Math.floor((window.innerWidth * window.innerHeight) / 20000));
+            for (let i = 0; i < count; i++) {
+                const r = Math.random();
                 particlesArray.push({
-                    x: Math.random() * canvasBg.width,
-                    y: Math.random() * canvasBg.height,
-                    size: Math.random() * 3 + 1,
-                    speedX: (Math.random() - 0.5) * 0.5,
-                    speedY: (Math.random() - 0.5) * 0.5,
-                    color: Math.random() > 0.5 ? '#00f3ff' : '#ffcc00'
+                    x: Math.random() * canvasBg.width, y: Math.random() * canvasBg.height,
+                    size: Math.random() * 2.5 + 0.8,
+                    speedX: (Math.random() - 0.5) * 0.3, speedY: (Math.random() - 0.5) * 0.3,
+                    color: r < 0.45 ? '#00f3ff' : r < 0.8 ? '#ffcc00' : '#ff2d95'
                 });
             }
         }
-        
-        function drawHexagon(ctx, x, y, size, color) {
+        function drawHex(ctx, x, y, s, c) {
             ctx.beginPath();
-            for (let i = 0; i < 6; i++) {
-                ctx.lineTo(x + size * Math.cos(i * Math.PI / 3), y + size * Math.sin(i * Math.PI / 3));
-            }
-            ctx.closePath();
-            ctx.fillStyle = color;
-            ctx.globalAlpha = 0.4;
-            ctx.fill();
+            for (let i = 0; i < 6; i++) ctx.lineTo(x + s * Math.cos(i * Math.PI / 3), y + s * Math.sin(i * Math.PI / 3));
+            ctx.closePath(); ctx.fillStyle = c; ctx.globalAlpha = 0.35; ctx.fill(); ctx.globalAlpha = 1;
         }
-
-        function animateParticlesBg() {
+        function animateBg() {
             ctxBg.clearRect(0, 0, canvasBg.width, canvasBg.height);
-            particlesArray.forEach(p => {
+            for (const p of particlesArray) {
                 p.x += p.speedX; p.y += p.speedY;
-                // Rebotar bordes
                 if (p.x < 0 || p.x > canvasBg.width) p.speedX *= -1;
                 if (p.y < 0 || p.y > canvasBg.height) p.speedY *= -1;
-                
-                drawHexagon(ctxBg, p.x, p.y, p.size, p.color);
-            });
-            requestAnimationFrame(animateParticlesBg);
-        }
-        
-        window.addEventListener('resize', initParticlesBg);
-        initParticlesBg();
-        animateParticlesBg();
-
-        // 3. Animación Digital del Gran Contador (Slide 6)
-        function animateCounter() {
-            const counterElement = document.getElementById('final-counter');
-            let startCount = 0;
-            const targetCount = 250000;
-            const duration = 2500; // 2.5 segundos
-            const startTime = performance.now();
-
-            function updateCounter(currentTime) {
-                const elapsedTime = currentTime - startTime;
-                const progress = Math.min(elapsedTime / duration, 1);
-                
-                // Ease Out Expo Easing function (rápido al principio, lento al final)
-                const easeOutProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-                
-                const currentCount = Math.floor(easeOutProgress * targetCount);
-                counterElement.innerText = currentCount.toLocaleString('es-ES'); // Formato con separador de miles
-
-                if (progress < 1) {
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    counterElement.innerText = targetCount.toLocaleString('es-ES'); // Asegurar final exacto
-                }
+                drawHex(ctxBg, p.x, p.y, p.size, p.color);
             }
-            requestAnimationFrame(updateCounter);
+            requestAnimationFrame(animateBg);
         }
+        window.addEventListener('resize', initParticlesBg);
+        initParticlesBg(); animateBg();
 
-        // 4. Efecto Especial de "Confetti Neón / Estrellas" (Slide 6)
+        // Confetti - clean celebration, NO soccer balls or particles
         const canvasConfetti = document.getElementById('canvas-confetti');
-        const ctxConfetti = canvasConfetti.getContext('2d');
-        let confettiArray = [];
-        let confettiActive = false;
+        const ctxC = canvasConfetti.getContext('2d');
+        let confetti = []; let confettiOn = false; let confettiLoop = false;
 
         function triggerConfetti() {
-            canvasConfetti.width = window.innerWidth;
-            canvasConfetti.height = window.innerHeight;
-            confettiArray = [];
-            confettiActive = true;
-
-            const colors = ['#00f3ff', '#ffcc00', '#ffffff'];
-            for (let i = 0; i < 150; i++) {
-                const randType = Math.random();
-                confettiArray.push({
+            canvasConfetti.width = window.innerWidth; canvasConfetti.height = window.innerHeight;
+            confetti = []; confettiOn = true;
+            const colors = ['#00f3ff', '#ffcc00', '#ff2d95', '#39ff14', '#ffffff'];
+            for (let i = 0; i < 120; i++) {
+                confetti.push({
                     x: Math.random() * canvasConfetti.width,
-                    y: Math.random() * canvasConfetti.height - canvasConfetti.height,
-                    size: randType < 0.2 ? Math.random() * 15 + 15 : Math.random() * 3 + 2,
-                    speedY: Math.random() * 3 + 2,
-                    speedX: (Math.random() - 0.5) * 2,
+                    y: Math.random() * -canvasConfetti.height,
+                    w: Math.random() * 8 + 3, h: Math.random() * 5 + 2,
+                    speedY: Math.random() * 3 + 1.5, speedX: (Math.random() - 0.5) * 2,
                     color: colors[Math.floor(Math.random() * colors.length)],
-                    type: randType < 0.15 ? '⚽' : (randType < 0.20 ? '🏆' : 'dot')
+                    rot: Math.random() * 360, rotSpeed: (Math.random() - 0.5) * 6
                 });
             }
-            if(!confettiLooping) {
-                confettiLooping = true;
-                animateConfetti();
-            }
+            if(!confettiLoop) { confettiLoop = true; animateC(); }
         }
-        let confettiLooping = false;
-
-        function animateConfetti() {
-            if(!confettiActive) return;
-            ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
-            let activeParticles = 0;
-            
-            confettiArray.forEach(c => {
-                c.y += c.speedY;
-                c.x += c.speedX;
-                if (c.y < canvasConfetti.height) activeParticles++;
-                
-                ctxConfetti.shadowBlur = 10;
-                ctxConfetti.shadowColor = c.color;
-                ctxConfetti.fillStyle = c.color;
-
-                if (c.type === 'dot') {
-                    ctxConfetti.beginPath();
-                    ctxConfetti.arc(c.x, c.y, c.size, 0, Math.PI * 2);
-                    ctxConfetti.fill();
-                } else {
-                    ctxConfetti.font = c.size + "px Arial";
-                    ctxConfetti.fillText(c.type, c.x, c.y);
-                }
-            });
-
-            if (activeParticles > 0) {
-                requestAnimationFrame(animateConfetti);
-            } else {
-                confettiLooping = false;
-                ctxConfetti.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+        function animateC() {
+            if(!confettiOn) return;
+            ctxC.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height);
+            let active = 0;
+            for (const c of confetti) {
+                c.y += c.speedY; c.x += c.speedX; c.rot += c.rotSpeed;
+                if (c.y < canvasConfetti.height) active++;
+                ctxC.save();
+                ctxC.translate(c.x, c.y);
+                ctxC.rotate(c.rot * Math.PI / 180);
+                ctxC.fillStyle = c.color;
+                ctxC.globalAlpha = 0.8;
+                ctxC.fillRect(-c.w / 2, -c.h / 2, c.w, c.h);
+                ctxC.restore();
             }
+            if (active > 0) requestAnimationFrame(animateC);
+            else { confettiLoop = false; ctxC.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); }
         }
     </script>
 </body>
