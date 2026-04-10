@@ -166,12 +166,29 @@
         
         /* Platform badges */
         .platform-badge { display: inline-flex; align-items: center; gap: 10px; padding: 15px 25px; border-radius: 12px; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; transition: 0.35s; }
+        /* Modals y Watermark */
+        .tata-watermark { position: fixed; left: 1.5rem; bottom: 1.5rem; opacity: 0.25; z-index: 100; filter: grayscale(100%); transition: var(--transition-smooth); pointer-events: none; }
+        .slide.in-view ~ .tata-watermark { opacity: 0.35; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+        .modal.show { display: flex; opacity: 1; }
+        .modal-content { position: relative; background: rgba(5,7,10,0.95); border: 2px solid var(--neon-cyan); border-radius: 15px; padding: 2.5rem; max-width: 90vw; max-height: 90vh; box-shadow: var(--neon-cyan-glow); transform: scale(0.9); transition: 0.3s; overflow-y: auto; }
+        .modal.show .modal-content { transform: scale(1); }
+        .modal-close { position: absolute; top: 15px; right: 20px; color: var(--neon-magenta); font-size: 2rem; cursor: pointer; text-shadow: 0 0 10px rgba(255,45,149,0.8); line-height: 1; }
+        .modal-close:hover { color: #fff; }
+        .modal-img-group { display: flex; gap: 1.5rem; align-items: stretch; justify-content: center; flex-wrap: wrap; }
+        .modal-img-item { background: rgba(0,0,0,0.5); border-radius: 10px; padding: 10px; border: 1px solid rgba(0,243,255,0.3); }
+        .modal-img-item img { max-width: 100%; max-height: 60vh; object-fit: contain; }
+        
+        .mermaid { background: rgba(0,0,0,0.6); padding: 1.5rem; border-radius: 12px; border: 1px solid rgba(0,243,255,0.2); box-shadow: 0 0 15px rgba(0,0,0,0.5); display: flex; justify-content: center; overflow-x: auto; }
         .platform-badge:hover { transform: translateY(-3px); }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>
 </head>
 <body>
 
     <canvas id="particles-bg"></canvas>
+    <img src="imagenes/Tata_Consultancy.png" alt="TATA Consultancy" class="tata-watermark" width="160">
 
     <!-- Mascota -->
     <div id="mascot-container">
@@ -179,7 +196,7 @@
             <div id="mascot-bubble">
                 <p id="mascot-text">¡Hola! Soy tu asistente de AI-Bank.</p>
             </div>
-            <img src="imagenes/mascot.jpeg" alt="Mascota" class="mascot-img" onerror="this.style.display='none'">
+            <img src="imagenes/mascot.png" alt="Mascota" class="mascot-img" style="cursor: pointer;" onclick="document.getElementById('mascot-bubble').classList.toggle('show')" onerror="this.style.display='none'">
         </div>
     </div>
 
@@ -195,6 +212,7 @@
         <div class="dot" onclick="scrollToSlide(7)"></div>
         <div class="dot" onclick="scrollToSlide(8)"></div>
         <div class="dot" onclick="scrollToSlide(9)"></div>
+        <div class="dot" onclick="scrollToSlide(10)"></div>
     </div>
 
     <div class="slider-container" id="slider">
@@ -204,7 +222,7 @@
             <div class="bg-overlay"></div>
             <div class="container">
                 <div class="neon-badge fade-up" style="background: rgba(0,243,255,0.08); border: 1px solid var(--neon-cyan); color: var(--neon-cyan); margin-bottom: 1.5rem;">
-                    🏟️ Copa del Mundo FIFA 2026
+                    FIFA WORLD CUP 2026
                 </div>
                 <h1 class="title-giant fade-up delay-1">AI-BANK</h1>
                 <h2 class="subtitle fade-up delay-2" style="font-size: 1.4rem; margin-bottom: 0.5rem; color: var(--neon-gold); text-shadow: var(--neon-gold-glow);">Pronósticos Inteligentes. Recompensas Reales.</h2>
@@ -231,7 +249,7 @@
 
                 <h3 class="fade-up delay-4" style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-muted);">El Equipo</h3>
                 <div class="grid-cols-4 fade-up delay-5">
-                    <div class="integrante-card"><h4>Isaac</h4><p>Leader</p></div>
+                    <div class="integrante-card"><h4>Isaac</h4><p>Coach</p></div>
                     <div class="integrante-card"><h4>Paola & Dilan</h4><p>Developers</p></div>
                     <div class="integrante-card"><h4>Juan & Sebastian</h4><p>Data Eng & QA</p></div>
                     <div class="integrante-card"><h4>Dayana</h4><p>CI/CD & Infra</p></div>
@@ -240,15 +258,15 @@
         </section>
 
         <!-- ======== SLIDE 2: VIDEO ======== -->
-        <section class="slide slide-2" id="s2" data-mascot="Observa nuestra aplicación en acción. ¡Dale al play!">
+        <section class="slide slide-2" id="s2" data-mascot="Escucha lo que tengo que decirte. ¡Dale al play!">
             <div class="bg-overlay"></div>
             <div class="container">
-                <h2 class="section-title fade-up">Nuestra App en Acción</h2>
+                <h2 class="section-title fade-up">Conoce a AI-Gent</h2>
                 <p class="fade-up delay-1" style="color: var(--text-muted); margin-bottom: 0.5rem; font-size: 1.1rem;">Mira cómo AI-Bank transforma la experiencia de fidelización bancaria</p>
                 <div class="deco-line deco-line-cyan fade-up delay-1"></div>
                 <div class="video-container scale-in delay-2">
                     <video controls muted>
-                        <source src="imagenes/video.mov">
+                        <source src="imagenes/AI-GENT-FINAL FINAL VERSION ULTRA FINAL.mp4">
                     </video>
                 </div>
             </div>
@@ -263,34 +281,46 @@
                 
                 <div style="display: flex; gap: 2rem; align-items: stretch; text-align: left; margin-top: 1rem;" class="fade-up delay-1">
                     <div class="glass-panel" style="flex: 1; border-color: rgba(0,243,255,0.3); padding: 1.8rem; display: flex; flex-direction: column;">
-                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;">
-                            <span style="font-size: 1.5rem;">🏦</span>
-                            <h3 class="neon-cyan" style="font-size: 1.25rem;">Ecosistema AI-Bank</h3>
+                        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem;">
+                            <span style="font-size: 2rem;">🏦</span>
+                            <h3 class="neon-cyan" style="font-size: 1.7rem;">Ecosistema AI-Bank</h3>
                         </div>
-                        <p style="margin-bottom: 0.8rem; color: var(--text-muted); font-size: 1rem; line-height: 1.7;">
-                            AI-Bank fortalece la <strong style="color: var(--neon-cyan);">fidelización</strong> de clientes mediante una app exclusiva para pronósticos del <strong style="color: var(--neon-gold);">Mundial 2026</strong>.
+                        <p style="margin-bottom: 1.2rem; color: var(--text-muted); font-size: 1.15rem; line-height: 1.8;">
+                            El ecosistema de AI-Bank está diseñado para ofrecer una experiencia interactiva de <strong style="color: var(--neon-cyan);">fidelización</strong>, donde cada acción suma valor de manera intuitiva y gamificada.
                         </p>
-                        <p style="margin-bottom: 0.8rem; color: var(--text-muted); font-size: 1rem; line-height: 1.7;">
-                            Integra un <strong style="color: var(--neon-magenta);">Motor de IA</strong> que analiza datos históricos de selecciones y genera recomendaciones inteligentes de pronóstico.
+                        <p style="margin-bottom: 1.8rem; color: var(--text-muted); font-size: 1.15rem; line-height: 1.8;">
+                            A través de nuestro <strong style="color: var(--neon-magenta);">AI-Gent</strong>, transformamos el análisis predictivo en recomendaciones sencillas. Toma decisiones informadas y maximiza tus oportunidades antes de hacer cada pronóstico.
                         </p>
-                        <div style="display: flex; gap: 1rem; margin-bottom: 0.8rem;">
-                            <div style="flex:1; background: rgba(0,243,255,0.06); border: 1px solid rgba(0,243,255,0.15); border-radius: 8px; padding: 0.6rem; text-align: center;">
-                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--neon-cyan); font-family: 'Space Grotesk';">104</div>
-                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Partidos</div>
+                        <ul style="list-style: none; padding-left: 0; margin-bottom: 1.8rem; color: var(--text-muted); line-height: 2.2; font-size: 1.1rem;">
+                            <li><span style="color: var(--neon-cyan); font-size: 1.2rem;">🧠</span> <strong style="color: var(--neon-cyan); font-size: 1.15rem;">Asistencia:</strong> Consulta con la IA para obtener insights.</li>
+                            <li><span style="color: var(--neon-gold); font-size: 1.2rem;">🎯</span> <strong style="color: var(--neon-gold); font-size: 1.15rem;">Decisión:</strong> Asegura tu elección con datos reales.</li>
+                            <li><span style="color: var(--neon-magenta); font-size: 1.2rem;">🏆</span> <strong style="color: var(--neon-magenta); font-size: 1.15rem;">Beneficios:</strong> Gana mAiles y canjea recompensas.</li>
+                        </ul>
+                        <div style="background: linear-gradient(90deg, rgba(255,204,0,0.05), rgba(255,204,0,0.15), rgba(255,204,0,0.05)); border: 1px solid rgba(255,204,0,0.4); border-radius: 12px; padding: 1.2rem; margin-top: auto; display: flex; align-items: center; justify-content: space-around; box-shadow: 0 0 15px rgba(255,204,0,0.15); animation: float 6s infinite ease-in-out;">
+                            <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                <div style="background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; border: 1px solid rgba(0,243,255,0.3);">
+                                    <span style="font-size: 1.2rem;">🎯</span>
+                                </div>
+                                <span style="color: var(--neon-cyan); font-size: 0.75rem; font-family: 'Space Grotesk'; font-weight: 700; letter-spacing: 1px;">ACIERTAS</span>
                             </div>
-                            <div style="flex:1; background: rgba(255,204,0,0.06); border: 1px solid rgba(255,204,0,0.15); border-radius: 8px; padding: 0.6rem; text-align: center;">
-                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--neon-gold); font-family: 'Space Grotesk';">48</div>
-                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Selecciones</div>
+                            
+                            <div style="color: var(--neon-gold); font-size: 1.5rem; opacity: 0.8;">➔</div>
+                            
+                            <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                <div style="background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; border: 1px solid rgba(255,204,0,0.5); box-shadow: 0 0 10px rgba(255,204,0,0.3);">
+                                    <span style="font-size: 1.2rem;">🪙</span>
+                                </div>
+                                <span style="color: var(--neon-gold); font-size: 0.8rem; font-family: 'Space Grotesk'; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 0 8px rgba(255,204,0,0.5);">GANAS mAILES</span>
                             </div>
-                            <div style="flex:1; background: rgba(255,45,149,0.06); border: 1px solid rgba(255,45,149,0.15); border-radius: 8px; padding: 0.6rem; text-align: center;">
-                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--neon-magenta); font-family: 'Space Grotesk';">3</div>
-                                <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;">Países Sede</div>
+
+                            <div style="color: var(--neon-gold); font-size: 1.5rem; opacity: 0.8;">➔</div>
+                            
+                            <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                <div style="background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin-bottom: 6px; border: 1px solid rgba(255,45,149,0.3);">
+                                    <span style="font-size: 1.2rem;">🎁</span>
+                                </div>
+                                <span style="color: var(--neon-magenta); font-size: 0.75rem; font-family: 'Space Grotesk'; font-weight: 700; letter-spacing: 1px;">CANJEAS</span>
                             </div>
-                        </div>
-                        <div style="background: rgba(255,204,0,0.08); border: 1px solid rgba(255,204,0,0.3); border-radius: 10px; padding: 0.8rem; margin-top: auto;">
-                            <p style="color: var(--neon-gold); font-size: 0.95rem; line-height: 1.5; font-weight: 800;">
-                                🏆 Cliente acierta → gana <strong>mAiles</strong> → canjea recompensas reales
-                            </p>
                         </div>
                     </div>
                     <div style="flex: 1.2; border: 1px solid var(--neon-gold); border-radius: 15px; overflow: hidden; box-shadow: var(--neon-gold-glow); display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); padding: 0.5rem;">
@@ -350,13 +380,13 @@
                 
                 <div class="ai-flow mt-3">
                     <div class="grid-cols-2">
-                        <div class="ai-node fade-up delay-1" style="text-align: center;">
+                        <div class="ai-node fade-up delay-1" style="text-align: center; cursor: pointer;" onclick="openModal('kmeans')">
                             <img src="imagenes/cerebro.png" style="width: 65px; height: 65px; object-fit: contain; margin-bottom: 8px;" alt="">
                             <h4 class="neon-cyan">Segmentación de Clientes</h4>
                             <p style="margin-bottom: 0.8rem;">Análisis de historial crediticio con <strong style="color: var(--neon-cyan);">K-Means RFM</strong>. Premios extras para los mejores clientes.</p>
                             <div class="neon-badge" style="background: rgba(0,243,255,0.06); border: 1px solid rgba(0,243,255,0.2); color: var(--neon-cyan); font-size: 0.75rem;">📊 Clusterización Inteligente</div>
                         </div>
-                        <div class="ai-node ai-node-gold fade-up delay-2" style="text-align: center;">
+                        <div class="ai-node ai-node-gold fade-up delay-2" style="text-align: center; cursor: pointer;" onclick="openModal('prediccion')">
                             <img src="imagenes/boost.png" style="width: 65px; height: 65px; object-fit: contain; margin-bottom: 8px;" alt="">
                             <h4>Modelo de Predicción</h4>
                             <p style="margin-bottom: 0.8rem;"><strong style="color: var(--neon-gold);">Random Forest</strong>, <strong style="color: var(--neon-gold);">Regresión Logística</strong> y <strong style="color: var(--neon-gold);">GradientBoosting</strong>.</p>
@@ -365,74 +395,157 @@
                     </div>
                     
                     <div class="ai-node fade-up delay-3" style="text-align: center; border-color: var(--neon-magenta);">
-                        <h4 style="color: var(--neon-magenta);">🤖 Asistente Virtual IA</h4>
+                        <img src="imagenes/modelochat.png" style="width: 65px; height: 65px; object-fit: contain; margin-bottom: 8px;" alt="AI-Gent">
+                        <h4 style="color: var(--neon-magenta);">🤖 AI-GENT</h4>
                         <p>Alimentado con toda la información de la app para <strong style="color: var(--neon-magenta);">resolver dudas</strong> y asistir al usuario <strong style="color: var(--neon-magenta);">en tiempo real</strong>.</p>
                     </div>
 
                     <div class="grid-cols-3 fade-up delay-4">
                         <div class="stat-box" style="background: rgba(0,243,255,0.04); border: 1px solid rgba(0,243,255,0.12); border-radius: 10px;">
-                            <div class="stat-number neon-cyan" style="font-size: 2rem;">3</div>
-                            <div class="stat-label">Modelos Entrenados</div>
+                            <div class="stat-number neon-cyan" style="font-size: 1.3rem; font-family: 'Space Grotesk';">🚀 Velocidad</div>
+                            <div class="stat-label" style="text-transform: none; font-size: 0.9rem; margin-top: 5px;">Procesamiento Ágil y Tiempo Real</div>
                         </div>
                         <div class="stat-box" style="background: rgba(255,204,0,0.04); border: 1px solid rgba(255,204,0,0.12); border-radius: 10px;">
-                            <div class="stat-number neon-gold" style="font-size: 2rem;">+10K</div>
-                            <div class="stat-label">Datos de Partidos</div>
+                            <div class="stat-number neon-gold" style="font-size: 1.3rem; font-family: 'Space Grotesk';">🛡️ Confianza</div>
+                            <div class="stat-label" style="text-transform: none; font-size: 0.9rem; margin-top: 5px;">Decisiones robustas basadas en datos</div>
                         </div>
                         <div class="stat-box" style="background: rgba(255,45,149,0.04); border: 1px solid rgba(255,45,149,0.12); border-radius: 10px;">
-                            <div class="stat-number" style="font-size: 2rem; color: var(--neon-magenta);">24/7</div>
-                            <div class="stat-label">Asistente Activo</div>
+                            <div class="stat-number" style="font-size: 1.3rem; color: var(--neon-magenta); font-family: 'Space Grotesk';">📈 Escalabilidad</div>
+                            <div class="stat-label" style="text-transform: none; font-size: 0.9rem; margin-top: 5px;">Concebido para transacciones masivas</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ======== SLIDE 6: ARQUETIPOS (solo texto) ======== -->
-        <section class="slide slide-6" id="s6" data-mascot="Adaptamos los beneficios basándonos en encuestas y análisis de mercado.">
+        <!-- ======== SLIDE 7: TOPOLOGÍA Y FLUJO (PARTE A) ======== -->
+        <section class="slide slide-7" id="s7" data-mascot="Observa nuestra arquitectura de IA híbrida en acción.">
             <div class="bg-overlay"></div>
-            <div class="container">
-                <h2 class="section-title fade-up">Arquetipos de Usuarios</h2>
+            <div class="container" style="max-width: 1400px; width: 95%;">
+                <h2 class="section-title fade-up">Topología y Flujo de IA en AI-Bank</h2>
                 <div class="deco-line deco-line-gold fade-up delay-1"></div>
-                <p class="fade-up delay-1" style="font-size: 1.1rem; margin-bottom: 1.5rem; color: var(--text-muted);">Clasificamos a los usuarios según encuestas para premios personalizados</p>
+                <p class="fade-up delay-1" style="font-size: 1.1rem; margin-bottom: 2rem; color: var(--text-muted);">Ecosistema híbrido que fusiona Machine Learning Analítico (Python) con IA Generativa (LLMs).</p>
 
-                <div class="grid-cols-3 fade-up delay-2">
-                    <div class="archetype-card" style="border: 1px solid rgba(255,204,0,0.3);">
-                        <span class="archetype-icon">⚡</span>
-                        <h3 style="color: var(--neon-gold);">Perfil Activo</h3>
-                        <p>Participan <strong style="color: var(--neon-gold);">frecuentemente</strong> en los pronósticos, buscan la emoción del juego y <strong style="color: var(--neon-gold);">acumulan mAiles</strong> activamente con cada partido.</p>
-                    </div>
-                    <div class="archetype-card" style="border: 1px solid rgba(0,243,255,0.3);">
-                        <span class="archetype-icon">💡</span>
-                        <h3 style="color: var(--neon-cyan);">Perfil Ocasional</h3>
-                        <p>Necesitan <strong style="color: var(--neon-cyan);">incentivos adicionales</strong> de la IA para decidirse a participar. La recomendación del modelo es clave para su enganche.</p>
-                    </div>
-                    <div class="archetype-card" style="border: 1px solid rgba(255,45,149,0.3);">
-                        <span class="archetype-icon">🔥</span>
-                        <h3 style="color: var(--neon-magenta);">Súper Fans</h3>
-                        <p>Utilizan <strong style="color: var(--neon-magenta);">todos los recursos IA</strong>, participan en cada partido y reclaman los <strong style="color: var(--neon-magenta);">premios de mayor valor</strong> del ecosistema.</p>
-                    </div>
-                </div>
+                <div style="display: flex; gap: 2rem; align-items: stretch; text-align: left;">
+                    <!-- Diagrama Mermaid -->
+                    <div style="flex: 1.3;" class="fade-up delay-2">
+                        <h3 class="neon-cyan" style="font-size: 1.2rem; margin-bottom: 1rem;">🗺️ Diagrama Visual de Arquitectura AI</h3>
+                        <div class="mermaid">
+flowchart LR
+    %% Nodos Iniciales
+    User[👤 Cliente]
+    
+    %% Modelos
+    KMeans[📊 Modelo Python K-Means]
+    Gemini[✨ Google Gemini IA]
+    Prediccion[⚽ API Deportiva Python]
+    
+    %% Resultados Finales
+    Nivel[🥇 Nivel Financiero Oro/Plata]
+    Arquetipo[🎮 Arquetipo Gamificado]
+    Premios[🏆 Multiplicadores de mAiles]
 
-                <!-- Quick insight stats -->
-                <div style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem;" class="fade-up delay-3">
-                    <div class="stat-box">
-                        <div class="stat-number neon-gold" style="font-size: 2rem;">60%</div>
-                        <div class="stat-label">Perfil Activo</div>
+    %% Relación: Eje Financiero
+    User -->|1. Historial Bancario| KMeans
+    KMeans -->|Genera| Nivel
+    
+    %% Relación: Eje Psicológico Gemini
+    User -->|2. Respuestas al Test| Gemini
+    Nivel -.->|Contexto IA| Gemini
+    Gemini -->|Calcula| Arquetipo
+    
+    %% Relación: Eje Gamificación
+    User -->|3. Predice Partidos| Prediccion
+    Prediccion -->|Calcula| Premios
+
+    %% Estilos de Colores
+    classDef model fill:#15803d,stroke:#4ade80,stroke-width:2px,color:#fff;
+    classDef llm fill:#854d0e,stroke:#facc15,stroke-width:2px,color:#fff;
+    classDef result fill:#1e40af,stroke:#60a5fa,stroke-width:2px,color:#fff;
+
+    class KMeans,Prediccion model;
+    class Gemini llm;
+    class Nivel,Arquetipo,Premios result;
+                        </div>
                     </div>
-                    <div class="stat-box">
-                        <div class="stat-number neon-cyan" style="font-size: 2rem;">25%</div>
-                        <div class="stat-label">Ocasional</div>
-                    </div>
-                    <div class="stat-box">
-                        <div class="stat-number" style="font-size: 2rem; color: var(--neon-magenta);">15%</div>
-                        <div class="stat-label">Súper Fans</div>
+                    
+                    <!-- Explicación Modelo Financiero -->
+                    <div class="glass-panel fade-up delay-3" style="flex: 1; display: flex; flex-direction: column;">
+                        <h3 class="neon-gold" style="font-size: 1.25rem; margin-bottom: 1rem;">1. El Modelo Financiero: Clustering Crediticio</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.6;">
+                            Todo comienza en el backend con el modelo estadístico (`modelo_kmeans.pkl`). Analiza variables financieras fuertes como saldo por vencer y días mora.<br><br>
+                            Mediante K-Means normalizado, ubica al cliente en su verdadero contexto de poder adquisitivo.
+                        </p>
+                        <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(0,243,255,0.2); border-radius: 10px; padding: 1.2rem; margin-top: auto;">
+                            <h4 style="color: var(--neon-cyan); margin-bottom: 8px;">Niveles Económicos en la App:</h4>
+                            <ul style="list-style: none; padding: 0; line-height: 1.8; color: #fff;">
+                                <li>🥇 <strong class="neon-gold">Segmento A:</strong> Nivel Gold</li>
+                                <li>🥈 <strong style="color: #c0c0c0;">Segmento B:</strong> Nivel Silver</li>
+                                <li>🥉 <strong style="color: #cd7f32;">Segmento C:</strong> Nivel Bronce</li>
+                            </ul>
+                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">Traduce un segmento puro a lenguaje comercial para dictar el límite de juego y beneficios.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ======== SLIDE 7: QA & UX/UI ======== -->
-        <section class="slide slide-7" id="s7" data-mascot="Nos centramos en código limpio y una experiencia de usuario perfecta.">
+        <!-- ======== SLIDE 8: TOPOLOGÍA Y FLUJO (PARTE B) ======== -->
+        <section class="slide slide-8" id="s8" data-mascot="Gemini permite entender tu psicología, ajustando los premios a lo que realmente te gusta.">
+            <div class="bg-overlay"></div>
+            <div class="container" style="max-width: 1400px; width: 95%;">
+                <div style="display: flex; gap: 2rem; align-items: stretch; text-align: left;">
+                    
+                    <!-- Fusión Gemini y Arquetipos -->
+                    <div class="glass-panel fade-up delay-1" style="flex: 1.5;">
+                        <h3 class="neon-magenta" style="font-size: 1.3rem; margin-bottom: 1rem;">2. La Fusión con IA Generativa (Google Gemini)</h3>
+                        <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                            Combinamos el riesgo crediticio (Oro/Plata), historial, y respuestas de un Cuestionario Psicológico. Gemini analiza este súper contexto y dictamina tu <strong style="color: var(--neon-magenta);">Arquetipo Gamificado</strong>:
+                        </p>
+                        <div class="grid-cols-3" style="gap: 1rem;">
+                            <div class="archetype-card" style="padding: 1rem; border: 1px solid rgba(0,243,255,0.3);">
+                                <span class="archetype-icon" style="font-size: 2rem;">⚔️</span>
+                                <h4 style="color: var(--neon-cyan); font-family: 'Space Grotesk'; font-size: 1.1rem; margin-bottom: 5px;">Competidor</h4>
+                                <p style="font-size: 0.85rem; line-height: 1.4;">Para clientes con tolerancia al riesgo y que aspiran a lo mejor.</p>
+                            </div>
+                            <div class="archetype-card" style="padding: 1rem; border: 1px solid rgba(255,204,0,0.3);">
+                                <span class="archetype-icon" style="font-size: 2rem;">🛡️</span>
+                                <h4 style="color: var(--neon-gold); font-family: 'Space Grotesk'; font-size: 1.1rem; margin-bottom: 5px;">Acumulador</h4>
+                                <p style="font-size: 0.85rem; line-height: 1.4;">Para clientes conservadores, metódicos y de bajo riesgo.</p>
+                            </div>
+                            <div class="archetype-card" style="padding: 1rem; border: 1px solid rgba(255,45,149,0.3);">
+                                <span class="archetype-icon" style="font-size: 2rem;">🛒</span>
+                                <h4 style="color: var(--neon-magenta); font-family: 'Space Grotesk'; font-size: 1.1rem; margin-bottom: 5px;">Práctico</h4>
+                                <p style="font-size: 0.85rem; line-height: 1.4;">Para cazadores rápidos de devoluciones como el Cashback.</p>
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(255,204,0,0.08); padding: 1.2rem; border-radius: 10px; margin-top: 1.5rem; border: 1px dashed rgba(255,204,0,0.4);">
+                            <h4 class="neon-gold" style="font-size: 1.1rem; margin-bottom: 5px;">💡 Resumen de Valor</h4>
+                            <p style="font-size: 0.95rem; line-height: 1.5; color: var(--text-main);">
+                                Fusionamos la rigurosidad del ML Analítico (riesgo financiero) con la flexibilidad de un LLM (motivos psicológicos), decidiendo así el catálogo de recompensa más efectivo y retentivo para el banco.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Dinámica Mundial y Ventaja Gemini -->
+                    <div style="flex: 1; display: flex; flex-direction: column; gap: 1.5rem;" class="fade-up delay-2">
+                        <div class="glass-panel" style="border-color: var(--neon-green);">
+                            <h3 style="color: var(--neon-green); font-size: 1.25rem; margin-bottom: 0.5rem;">🚀 El factor diferencial</h3>
+                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.6;">
+                                A diferencia de algoritmos clasicos, <strong style="color:#fff;">Google Gemini</strong> comprende rápidamente el contexto natural del usuario. Transforma respuestas emocionales en un entendimiento profundo para otorgar premios más atractivos al instante, mejorando la retención espectacularmente.
+                            </p>
+                        </div>
+                        <div style="flex: 1; border: 1px solid var(--neon-magenta); border-radius: 10px; overflow: hidden; box-shadow: 0 0 15px rgba(255,45,149,0.2); background: #000;">
+                            <img src="imagenes/ai_gemini_archetypes.png" alt="Generative Fusion" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== SLIDE 9: QA & UX/UI ======== -->
+        <section class="slide slide-9" id="s9" data-mascot="Nos centramos en código limpio y una experiencia de usuario perfecta.">
             <div class="bg-overlay"></div>
             <div class="container">
                 <h2 class="section-title fade-up">QA & UX/UI</h2>
@@ -448,7 +561,6 @@
                         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
                             <span class="neon-badge" style="background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.25); color: var(--neon-green); font-size: 0.75rem;">✓ Code Smells</span>
                             <span class="neon-badge" style="background: rgba(0,243,255,0.08); border: 1px solid rgba(0,243,255,0.25); color: var(--neon-cyan); font-size: 0.75rem;">✓ Security</span>
-                            <span class="neon-badge" style="background: rgba(255,204,0,0.08); border: 1px solid rgba(255,204,0,0.25); color: var(--neon-gold); font-size: 0.75rem;">✓ Coverage</span>
                         </div>
                     </div>
                     
@@ -466,8 +578,8 @@
             </div>
         </section>
 
-        <!-- ======== SLIDE 8: STACK TECNOLÓGICO ======== -->
-        <section class="slide slide-8" id="s8" data-mascot="Tecnologías modernas, eficientes y seguras dominan nuestro proyecto.">
+        <!-- ======== SLIDE 10: STACK TECNOLÓGICO ======== -->
+        <section class="slide slide-10" id="s10" data-mascot="Tecnologías modernas, eficientes y seguras dominan nuestro proyecto.">
             <div class="bg-overlay"></div>
             <div class="container" style="position: relative; z-index: 10;">
                 <h2 class="section-title fade-up" style="font-size: 3rem;">Stack Tecnológico</h2>
@@ -478,12 +590,12 @@
                     <div class="glass-panel" style="text-align: center; border-color: #61dafb; padding: 1.5rem;">
                         <div style="font-size: 2.5rem; margin-bottom: 0.3rem;">⚛️</div>
                         <h4 style="color: #61dafb; font-size: 1.3rem; margin-bottom: 6px; font-family: 'Space Grotesk', sans-serif; font-weight: 700;">React</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Web App Responsiva con hooks, context y componentes dinámicos</p>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Seleccionado por su DOM virtual ultra-rápido, lo que asegura una fluidez interactiva impecable y reactiva para el usuario final.</p>
                     </div>
                     <div class="glass-panel" style="text-align: center; border-color: #3ecf8e; padding: 1.5rem;">
                         <div style="font-size: 2.5rem; margin-bottom: 0.3rem;">🗄️</div>
                         <h4 style="color: #3ecf8e; font-size: 1.3rem; margin-bottom: 6px; font-family: 'Space Grotesk', sans-serif; font-weight: 700;">Supabase</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Auth, PostgreSQL y Realtime en tiempo real</p>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Elegido por su persistencia Postgres y WebSockets robustos, vitales para procesar transacciones en tiempo real sin latencia.</p>
                     </div>
                 </div>
 
@@ -491,22 +603,22 @@
                     <div class="glass-panel" style="text-align: center; border-color: rgba(255,255,255,0.25); padding: 1.2rem 0.8rem;">
                         <div style="font-size: 1.6rem;">🐙</div>
                         <h4 style="color: #fff; font-size: 0.95rem; font-family: 'Space Grotesk', sans-serif;">GitHub</h4>
-                        <p style="font-size: 0.75rem; color: var(--text-muted);">Gobierno & CI</p>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">Indispensable para el gobierno de CI/CD continuo.</p>
                     </div>
                     <div class="glass-panel" style="text-align: center; border-color: #00d1b2; padding: 1.2rem 0.8rem;">
                         <div style="font-size: 1.6rem;">🚀</div>
                         <h4 style="color: #00d1b2; font-size: 0.95rem; font-family: 'Space Grotesk', sans-serif;">Netlify</h4>
-                        <p style="font-size: 0.75rem; color: var(--text-muted);">Producción & CD</p>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">Garantiza alta disponibilidad e infraestructura Serverless ágil.</p>
                     </div>
                     <div class="glass-panel" style="text-align: center; border-color: #009688; padding: 1.2rem 0.8rem;">
                         <div style="font-size: 1.6rem;">🐍</div>
                         <h4 style="color: #009688; font-size: 0.95rem; font-family: 'Space Grotesk', sans-serif;">FastAPI</h4>
-                        <p style="font-size: 0.75rem; color: var(--text-muted);">Motor IA</p>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">El estándar back-end más veloz para pipelines de Machine Learning.</p>
                     </div>
                     <div class="glass-panel" style="text-align: center; border-color: #e535ab; padding: 1.2rem 0.8rem;">
                         <div style="font-size: 1.6rem;">📧</div>
                         <h4 style="color: #e535ab; font-size: 0.95rem; font-family: 'Space Grotesk', sans-serif;">EmailJS</h4>
-                        <p style="font-size: 0.75rem; color: var(--text-muted);">Notificaciones</p>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">Requerido para generar alertas automatizadas sin servidores.</p>
                     </div>
                 </div>
 
@@ -517,18 +629,23 @@
             </div>
         </section>
 
-        <!-- ======== SLIDE 10: VISITA NUESTRA APP (FINAL) ======== -->
-        <section class="slide slide-10" id="s10" data-mascot="¡Descarga nuestra app o visítanos en la web! Somos multiplataforma 🎉">
+        <!-- ======== SLIDE 11: VISITA NUESTRA APP (FINAL) ======== -->
+        <section class="slide slide-11" id="s11" data-mascot="¡Descarga nuestra app o visítanos en la web! Somos multiplataforma 🎉">
             <div class="bg-overlay"></div>
             <canvas id="canvas-confetti"></canvas>
             
             <div class="container" style="position: relative; z-index: 10;">
-                <div class="fade-up" style="font-size: 4rem; margin-bottom: 1rem;">🌐</div>
                 <h2 class="section-title fade-up delay-1" style="font-size: 3.2rem;">Visita Nuestra App</h2>
                 <div class="deco-line deco-line-cyan fade-up delay-1"></div>
-                <p class="fade-up delay-2" style="font-size: 1.3rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto; line-height: 1.7;">
-                    AI-Bank es <strong style="color: var(--neon-cyan);">multiplataforma</strong>. Accede desde la web o descarga la APK en tu dispositivo Android.
-                </p>
+                
+                <div style="display: flex; gap: 2rem; align-items: center; justify-content: center; margin-top: 1.5rem; margin-bottom: 2rem;" class="fade-up delay-2">
+                    <p style="font-size: 1.3rem; color: var(--text-muted); max-width: 500px; line-height: 1.7; text-align: left;">
+                        AI-Bank es <strong style="color: var(--neon-cyan);">multiplataforma</strong>. Escanea el código QR para acceder rápidamente desde tu móvil o visita nuestro portal web.
+                    </p>
+                    <div style="background: rgba(255,255,255,0.9); padding: 10px; border-radius: 15px; box-shadow: var(--neon-cyan-glow);">
+                        <img src="imagenes/QR.png" alt="QR Code App" style="width: 150px; height: 150px; border-radius: 8px;">
+                    </div>
+                </div>
 
                 <!-- Platform badges -->
                 <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2.5rem; flex-wrap: wrap;" class="fade-up delay-3">
@@ -550,8 +667,8 @@
 
                 <!-- CTA Buttons -->
                 <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;" class="fade-up delay-4">
-                    <a href="https://ai-bank-project.netlify.app" target="_blank" class="cta-btn cta-btn-cyan">
-                        🚀 Acceder a la Web App
+                    <a href="https://ai-bank-ec.netlify.app/" target="_blank" class="cta-btn cta-btn-cyan">
+                        🚀 Web App: ai-bank-ec.netlify.app
                     </a>
                     <a href="#" class="cta-btn cta-btn-gold">
                         📲 Descargar APK
@@ -562,6 +679,14 @@
             </div>
         </section>
 
+    </div>
+
+    <!-- Modals Overlay -->
+    <div id="image-modal" class="modal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="modal-close" onclick="closeModal(event)">&times;</span>
+            <div id="modal-body" class="modal-img-group"></div>
+        </div>
     </div>
 
     <script>
@@ -711,6 +836,22 @@
             }
             if (active > 0) requestAnimationFrame(animateC);
             else { confettiLoop = false; ctxC.clearRect(0, 0, canvasConfetti.width, canvasConfetti.height); }
+        }
+
+        // Modals Logic
+        function openModal(type) {
+            const modal = document.getElementById('image-modal');
+            const body = document.getElementById('modal-body');
+            body.innerHTML = '';
+            if (type === 'kmeans') {
+                body.innerHTML = '<div class="modal-img-item"><img src="imagenes/kmeans.png" alt="K-Means Clustering"></div>';
+            } else if (type === 'prediccion') {
+                body.innerHTML = '<div class="modal-img-item"><img src="imagenes/curvaRoc.png" alt="Curva ROC"></div><div class="modal-img-item"><img src="imagenes/prediccionmodelo.png" alt="Predicción de Modelo"></div>';
+            }
+            modal.classList.add('show');
+        }
+        function closeModal(e) {
+            document.getElementById('image-modal').classList.remove('show');
         }
     </script>
 </body>
