@@ -167,8 +167,8 @@
         /* Platform badges */
         .platform-badge { display: inline-flex; align-items: center; gap: 10px; padding: 15px 25px; border-radius: 12px; font-family: 'Space Grotesk', sans-serif; font-size: 1rem; font-weight: 600; transition: 0.35s; }
         /* Modals y Watermark */
-        .tata-watermark { position: fixed; left: 1.5rem; bottom: 1.5rem; opacity: 0.25; z-index: 100; filter: grayscale(100%); transition: var(--transition-smooth); pointer-events: none; }
-        .slide.in-view ~ .tata-watermark { opacity: 0.35; }
+        .tata-watermark { position: fixed; left: 1.5rem; bottom: 1.5rem; opacity: 0.85; z-index: 100; transition: var(--transition-smooth); pointer-events: none; filter: drop-shadow(0 0 8px rgba(255,255,255,0.2)); }
+        .slide.in-view ~ .tata-watermark { opacity: 1; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
         .modal.show { display: flex; opacity: 1; }
         .modal-content { position: relative; background: rgba(5,7,10,0.95); border: 2px solid var(--neon-cyan); border-radius: 15px; padding: 2.5rem; max-width: 90vw; max-height: 90vh; box-shadow: var(--neon-cyan-glow); transform: scale(0.9); transition: 0.3s; overflow-y: auto; }
@@ -188,7 +188,7 @@
 <body>
 
     <canvas id="particles-bg"></canvas>
-    <img src="imagenes/Tata_Consultancy.png" alt="TATA Consultancy" class="tata-watermark" width="160">
+    <img src="imagenes/Tata_Consultancy.png" alt="TATA Consultancy" class="tata-watermark" width="220">
 
     <!-- Mascota -->
     <div id="mascot-container">
@@ -247,7 +247,7 @@
                     </div>
                 </div>
 
-                <h3 class="fade-up delay-4" style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-muted);">El Equipo</h3>
+                <h3 class="fade-up delay-4" style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-muted);">TEAM</h3>
                 <div class="grid-cols-4 fade-up delay-5">
                     <div class="integrante-card"><h4>Isaac</h4><p>Coach</p></div>
                     <div class="integrante-card"><h4>Paola & Dilan</h4><p>Developers</p></div>
@@ -419,71 +419,35 @@
         </section>
 
         <!-- ======== SLIDE 7: TOPOLOGÍA Y FLUJO (PARTE A) ======== -->
-        <section class="slide slide-7" id="s7" data-mascot="Observa nuestra arquitectura de IA híbrida en acción.">
+        <section class="slide slide-7" id="s7" data-mascot="Primero, conocemos a nuestro cliente. Un análisis rápido nos dice qué nivel otorgarle.">
             <div class="bg-overlay"></div>
-            <div class="container" style="max-width: 1400px; width: 95%;">
-                <h2 class="section-title fade-up">Topología y Flujo de IA en AI-Bank</h2>
+            <div class="container" style="max-width: 1000px; width: 95%;">
+                <h2 class="section-title fade-up">Perfil Crediticio Inteligente</h2>
                 <div class="deco-line deco-line-gold fade-up delay-1"></div>
-                <p class="fade-up delay-1" style="font-size: 1.1rem; margin-bottom: 2rem; color: var(--text-muted);">Ecosistema híbrido que fusiona Machine Learning Analítico (Python) con IA Generativa (LLMs).</p>
+                <p class="fade-up delay-1" style="font-size: 1.1rem; margin-bottom: 2.5rem; color: var(--text-muted);">Un análisis confiable y seguro de tu historial para ofrecerte lo que mereces.</p>
 
-                <div style="display: flex; gap: 2rem; align-items: stretch; text-align: left;">
-                    <!-- Diagrama Mermaid -->
-                    <div style="flex: 1.3;" class="fade-up delay-2">
-                        <h3 class="neon-cyan" style="font-size: 1.2rem; margin-bottom: 1rem;">🗺️ Diagrama Visual de Arquitectura AI</h3>
-                        <div class="mermaid">
-flowchart LR
-    %% Nodos Iniciales
-    User[👤 Cliente]
-    
-    %% Modelos
-    KMeans[📊 Modelo Python K-Means]
-    Gemini[✨ Google Gemini IA]
-    Prediccion[⚽ API Deportiva Python]
-    
-    %% Resultados Finales
-    Nivel[🥇 Nivel Financiero Oro/Plata]
-    Arquetipo[🎮 Arquetipo Gamificado]
-    Premios[🏆 Multiplicadores de mAiles]
-
-    %% Relación: Eje Financiero
-    User -->|1. Historial Bancario| KMeans
-    KMeans -->|Genera| Nivel
-    
-    %% Relación: Eje Psicológico Gemini
-    User -->|2. Respuestas al Test| Gemini
-    Nivel -.->|Contexto IA| Gemini
-    Gemini -->|Calcula| Arquetipo
-    
-    %% Relación: Eje Gamificación
-    User -->|3. Predice Partidos| Prediccion
-    Prediccion -->|Calcula| Premios
-
-    %% Estilos de Colores
-    classDef model fill:#15803d,stroke:#4ade80,stroke-width:2px,color:#fff;
-    classDef llm fill:#854d0e,stroke:#facc15,stroke-width:2px,color:#fff;
-    classDef result fill:#1e40af,stroke:#60a5fa,stroke-width:2px,color:#fff;
-
-    class KMeans,Prediccion model;
-    class Gemini llm;
-    class Nivel,Arquetipo,Premios result;
-                        </div>
-                    </div>
+                <div class="glass-panel fade-up delay-2 mt-4" style="text-align: center; padding: 3rem; border-color: rgba(255,204,0,0.4);">
+                    <h3 class="neon-gold" style="font-size: 1.8rem; margin-bottom: 1.5rem;">Conociendo tu Contexto</h3>
+                    <p style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 3rem; line-height: 1.8; font-weight: 400;">
+                        Estudiamos de manera automática tu actividad financiera para asignarte un <strong class="neon-cyan" style="font-weight: 700;">Nivel en AI-Bank</strong>.<br>
+                        Este nivel determina tus <strong style="color: var(--neon-magenta);">límites de juego y desbloquea beneficios</strong> diseñados para ti.
+                    </p>
                     
-                    <!-- Explicación Modelo Financiero -->
-                    <div class="glass-panel fade-up delay-3" style="flex: 1; display: flex; flex-direction: column;">
-                        <h3 class="neon-gold" style="font-size: 1.25rem; margin-bottom: 1rem;">1. El Modelo Financiero: Clustering Crediticio</h3>
-                        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.6;">
-                            Todo comienza en el backend con el modelo estadístico (`modelo_kmeans.pkl`). Analiza variables financieras fuertes como saldo por vencer y días mora.<br><br>
-                            Mediante K-Means normalizado, ubica al cliente en su verdadero contexto de poder adquisitivo.
-                        </p>
-                        <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(0,243,255,0.2); border-radius: 10px; padding: 1.2rem; margin-top: auto;">
-                            <h4 style="color: var(--neon-cyan); margin-bottom: 8px;">Niveles Económicos en la App:</h4>
-                            <ul style="list-style: none; padding: 0; line-height: 1.8; color: #fff;">
-                                <li>🥇 <strong class="neon-gold">Segmento A:</strong> Nivel Gold</li>
-                                <li>🥈 <strong style="color: #c0c0c0;">Segmento B:</strong> Nivel Silver</li>
-                                <li>🥉 <strong style="color: #cd7f32;">Segmento C:</strong> Nivel Bronce</li>
-                            </ul>
-                            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 10px;">Traduce un segmento puro a lenguaje comercial para dictar el límite de juego y beneficios.</p>
+                    <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+                        <div style="background: rgba(255,215,0,0.05); border: 1px solid var(--neon-gold); border-radius: 12px; padding: 1.5rem; flex: 1; min-width: 200px; box-shadow: 0 5px 15px rgba(255,204,0,0.15); transition: 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="font-size: 3rem; margin-bottom: 10px;">🥇</div>
+                            <h4 class="neon-gold" style="font-size: 1.3rem; margin-bottom: 8px;">Nivel Gold</h4>
+                            <p style="font-size: 0.95rem; color: var(--text-muted); font-weight: 500;">Máximos beneficios y multiplicadores.</p>
+                        </div>
+                        <div style="background: rgba(192,192,192,0.05); border: 1px solid #9aa5b4; border-radius: 12px; padding: 1.5rem; flex: 1; min-width: 200px; transition: 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="font-size: 3rem; margin-bottom: 10px;">🥈</div>
+                            <h4 style="color: #cbd5e1; font-size: 1.3rem; margin-bottom: 8px;">Nivel Silver</h4>
+                            <p style="font-size: 0.95rem; color: var(--text-muted); font-weight: 500;">Excelentes oportunidades y recompensas.</p>
+                        </div>
+                        <div style="background: rgba(205,127,50,0.05); border: 1px solid #cd7f32; border-radius: 12px; padding: 1.5rem; flex: 1; min-width: 200px; transition: 0.3s;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+                            <div style="font-size: 3rem; margin-bottom: 10px;">🥉</div>
+                            <h4 style="color: #e5a060; font-size: 1.3rem; margin-bottom: 8px;">Nivel Bronce</h4>
+                            <p style="font-size: 0.95rem; color: var(--text-muted); font-weight: 500;">El primer escalón rumbo a la cima.</p>
                         </div>
                     </div>
                 </div>
@@ -494,50 +458,52 @@ flowchart LR
         <section class="slide slide-8" id="s8" data-mascot="Gemini permite entender tu psicología, ajustando los premios a lo que realmente te gusta.">
             <div class="bg-overlay"></div>
             <div class="container" style="max-width: 1400px; width: 95%;">
-                <div style="display: flex; gap: 2rem; align-items: stretch; text-align: left;">
+                <div style="display: flex; gap: 2rem; align-items: stretch; text-align: left; height: 100%;">
                     
                     <!-- Fusión Gemini y Arquetipos -->
-                    <div class="glass-panel fade-up delay-1" style="flex: 1.5;">
-                        <h3 class="neon-magenta" style="font-size: 1.3rem; margin-bottom: 1rem;">2. La Fusión con IA Generativa (Google Gemini)</h3>
-                        <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
-                            Combinamos el riesgo crediticio (Oro/Plata), historial, y respuestas de un Cuestionario Psicológico. Gemini analiza este súper contexto y dictamina tu <strong style="color: var(--neon-magenta);">Arquetipo Gamificado</strong>:
-                        </p>
-                        <div class="grid-cols-3" style="gap: 1rem;">
-                            <div class="archetype-card" style="padding: 1rem; border: 1px solid rgba(0,243,255,0.3);">
-                                <span class="archetype-icon" style="font-size: 2rem;">⚔️</span>
-                                <h4 style="color: var(--neon-cyan); font-family: 'Space Grotesk'; font-size: 1.1rem; margin-bottom: 5px;">Competidor</h4>
-                                <p style="font-size: 0.85rem; line-height: 1.4;">Para clientes con tolerancia al riesgo y que aspiran a lo mejor.</p>
+                    <div class="glass-panel fade-up delay-1" style="flex: 1.2; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <h3 class="neon-magenta" style="font-size: 2.2rem; margin-bottom: 1rem;">La Magia de la IA Generativa</h3>
+                            <p style="color: var(--text-muted); font-size: 1.2rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                                Unimos tus datos con un Cuestionario Emocional. <strong style="color: #fff;">Google Gemini</strong> lee entre líneas para asignarte tu <strong style="color: var(--neon-magenta);">Arquetipo Gamificado</strong> y adaptar tu experiencia:
+                            </p>
+                        </div>
+                        <div class="grid-cols-3" style="gap: 1.2rem; flex: 1; margin: 0.5rem 0;">
+                            <div class="archetype-card" style="padding: 1.5rem 1rem; border: 1px solid rgba(0,243,255,0.3); height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                                <span class="archetype-icon" style="font-size: 2.8rem; margin-bottom: 12px;">⚔️</span>
+                                <h4 style="color: var(--neon-cyan); font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 10px;">Competidor</h4>
+                                <p style="font-size: 1rem; line-height: 1.6; color: #fff;">Tolera el riesgo y siempre aspira a lo mejor.</p>
                             </div>
-                            <div class="archetype-card" style="padding: 1rem; border: 1px solid rgba(255,204,0,0.3);">
-                                <span class="archetype-icon" style="font-size: 2rem;">🛡️</span>
-                                <h4 style="color: var(--neon-gold); font-family: 'Space Grotesk'; font-size: 1.1rem; margin-bottom: 5px;">Acumulador</h4>
-                                <p style="font-size: 0.85rem; line-height: 1.4;">Para clientes conservadores, metódicos y de bajo riesgo.</p>
+                            <div class="archetype-card" style="padding: 1.5rem 1rem; border: 1px solid rgba(255,204,0,0.3); height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                                <span class="archetype-icon" style="font-size: 2.8rem; margin-bottom: 12px;">🛡️</span>
+                                <h4 style="color: var(--neon-gold); font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 10px;">Acumulador</h4>
+                                <p style="font-size: 1rem; line-height: 1.6; color: #fff;">Conservador, metódico y con bajo riesgo.</p>
                             </div>
-                            <div class="archetype-card" style="padding: 1rem; border: 1px solid rgba(255,45,149,0.3);">
-                                <span class="archetype-icon" style="font-size: 2rem;">🛒</span>
-                                <h4 style="color: var(--neon-magenta); font-family: 'Space Grotesk'; font-size: 1.1rem; margin-bottom: 5px;">Práctico</h4>
-                                <p style="font-size: 0.85rem; line-height: 1.4;">Para cazadores rápidos de devoluciones como el Cashback.</p>
+                            <div class="archetype-card" style="padding: 1.5rem 1rem; border: 1px solid rgba(255,45,149,0.3); height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                                <span class="archetype-icon" style="font-size: 2.8rem; margin-bottom: 12px;">🛒</span>
+                                <h4 style="color: var(--neon-magenta); font-family: 'Space Grotesk'; font-size: 1.3rem; margin-bottom: 10px;">Práctico</h4>
+                                <p style="font-size: 1rem; line-height: 1.6; color: #fff;">Cazador rápido de beneficios como Cashback.</p>
                             </div>
                         </div>
 
-                        <div style="background: rgba(255,204,0,0.08); padding: 1.2rem; border-radius: 10px; margin-top: 1.5rem; border: 1px dashed rgba(255,204,0,0.4);">
-                            <h4 class="neon-gold" style="font-size: 1.1rem; margin-bottom: 5px;">💡 Resumen de Valor</h4>
-                            <p style="font-size: 0.95rem; line-height: 1.5; color: var(--text-main);">
-                                Fusionamos la rigurosidad del ML Analítico (riesgo financiero) con la flexibilidad de un LLM (motivos psicológicos), decidiendo así el catálogo de recompensa más efectivo y retentivo para el banco.
+                        <div style="background: rgba(255,204,0,0.08); padding: 1.6rem 2rem; border-radius: 12px; margin-top: 1rem; border: 1px dashed rgba(255,204,0,0.4);">
+                            <h4 class="neon-gold" style="font-size: 1.25rem; margin-bottom: 8px;">💡 El Catálogo Perfecto</h4>
+                            <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-main); font-weight: 500;">
+                                Usamos esta información para personalizar tu catálogo de recompensas, asegurando que te motiven de verdad.
                             </p>
                         </div>
                     </div>
 
                     <!-- Dinámica Mundial y Ventaja Gemini -->
-                    <div style="flex: 1; display: flex; flex-direction: column; gap: 1.5rem;" class="fade-up delay-2">
-                        <div class="glass-panel" style="border-color: var(--neon-green);">
-                            <h3 style="color: var(--neon-green); font-size: 1.25rem; margin-bottom: 0.5rem;">🚀 El factor diferencial</h3>
-                            <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem; line-height: 1.6;">
-                                A diferencia de algoritmos clasicos, <strong style="color:#fff;">Google Gemini</strong> comprende rápidamente el contexto natural del usuario. Transforma respuestas emocionales en un entendimiento profundo para otorgar premios más atractivos al instante, mejorando la retención espectacularmente.
+                    <div style="flex: 0.9; display: flex; flex-direction: column; gap: 1.5rem; justify-content: space-between;" class="fade-up delay-2">
+                        <div class="glass-panel" style="border-color: var(--neon-green); text-align: center; padding: 1.5rem;">
+                            <h3 style="color: var(--neon-green); font-size: 1.3rem; margin-bottom: 0.6rem;">🚀 El Factor Diferencial</h3>
+                            <p style="color: var(--text-muted); font-size: 1rem; line-height: 1.6; font-weight: 500;">
+                                A diferencia de procesos manuales, <strong style="color:#fff;">Gemini</strong> automatiza el entendimiento de tus preferencias, dándote lo que quieres al instante.
                             </p>
                         </div>
-                        <div style="flex: 1; border: 1px solid var(--neon-magenta); border-radius: 10px; overflow: hidden; box-shadow: 0 0 15px rgba(255,45,149,0.2); background: #000;">
-                            <img src="imagenes/ai_gemini_archetypes.png" alt="Generative Fusion" style="width: 100%; height: 100%; object-fit: cover;">
+                        <div style="flex: 1; border: 2px solid rgba(0,243,255,0.4); border-radius: 15px; overflow: hidden; box-shadow: var(--neon-cyan-glow); background: #000; min-height: 250px;">
+                            <img src="imagenes/ai_rewards.png" alt="Generative Fusion" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                     </div>
                 </div>
@@ -844,9 +810,20 @@ flowchart LR
             const body = document.getElementById('modal-body');
             body.innerHTML = '';
             if (type === 'kmeans') {
-                body.innerHTML = '<div class="modal-img-item"><img src="imagenes/kmeans.png" alt="K-Means Clustering"></div>';
+                body.innerHTML = '<div class="modal-img-item" style="max-width: 800px;"><img src="imagenes/kmeans.png" alt="K-Means Clustering"></div>';
             } else if (type === 'prediccion') {
-                body.innerHTML = '<div class="modal-img-item"><img src="imagenes/curvaRoc.png" alt="Curva ROC"></div><div class="modal-img-item"><img src="imagenes/prediccionmodelo.png" alt="Predicción de Modelo"></div>';
+                body.innerHTML = `
+                    <div style="display: flex; gap: 2rem; width: 100%; align-items: center; justify-content: center;">
+                        <div class="modal-img-item" style="flex: 1;">
+                            <h4 style="color: var(--neon-cyan); margin-bottom: 10px; text-align: center; font-family: 'Space Grotesk';">Curva ROC</h4>
+                            <img src="imagenes/curvaRoc.png" alt="Curva ROC">
+                        </div>
+                        <div class="modal-img-item" style="flex: 1;">
+                            <h4 style="color: var(--neon-gold); margin-bottom: 10px; text-align: center; font-family: 'Space Grotesk';">Nivel de confianza de los modelos</h4>
+                            <img src="imagenes/prediccionmodelo.png" alt="Predicción de Modelo">
+                        </div>
+                    </div>
+                `;
             }
             modal.classList.add('show');
         }
