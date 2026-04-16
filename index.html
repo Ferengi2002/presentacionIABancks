@@ -118,7 +118,7 @@
 
         /* Video */
         .video-container { width: 85%; max-width: 950px; margin: 1.5rem auto; aspect-ratio: 16/9; background: #000; border: 2px solid var(--neon-cyan); border-radius: 15px; box-shadow: var(--neon-cyan-glow); overflow: hidden; }
-        .video-container video, .video-container iframe { width: 100%; height: 100%; object-fit: contain; border: none; }
+        .video-container video { width: 100%; height: 100%; object-fit: contain; }
 
         /* Split layout */
         .split-box { display: flex; gap: 2rem; align-items: stretch; text-align: left; }
@@ -272,7 +272,9 @@
                 <p class="fade-up delay-1" style="color: var(--text-muted); margin-bottom: 0.5rem; font-size: 1.1rem;">Mira cómo AI-Bank transforma la experiencia de fidelización bancaria</p>
                 <div class="deco-line deco-line-cyan fade-up delay-1"></div>
                 <div class="video-container scale-in delay-2">
-                    <iframe src="https://drive.google.com/file/d/1-Ay8O3TlSItJOWljhrM2A66O83FpvAv4/preview" width="100%" height="100%" allow="autoplay" allowfullscreen></iframe>
+                    <video controls muted>
+                        <source src="imagenes/videoaibanks.mp4">
+                    </video>
                 </div>
             </div>
         </section>
@@ -395,7 +397,7 @@
         </section>
 
         <!-- ======== SLIDE 3: LÓGICA DE NEGOCIO ======== -->
-        <section class="slide slide-3" id="s3" data-mascot="La lógica del negocio concentra todo el ecosistema de IA con los beneficios mAiles.">
+        <section class="slide slide-3" id="s3" data-mascot="No te olvides que en nuestra aplicacion tambien ganas mAiles por invitar o referir a un amig@.">
             <div class="bg-overlay"></div>
             <div class="container">
                 <h2 class="section-title fade-up">Lógica de Negocio</h2>
@@ -458,10 +460,10 @@
             <div class="container">
                 <h2 class="section-title fade-up">Arquitectura</h2>
                 <div class="deco-line deco-line-cyan fade-up delay-1"></div>
-                <p class="fade-up delay-1" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem;">Infraestructura cloud-native escalable y segura</p>
+                <p class="fade-up delay-1" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem;">C4 Container Diagram</p>
                 
-                <div class="image-box scale-in delay-2" style="height: 480px; border: 2px solid rgba(0,243,255,0.2); background: rgba(0,0,0,0.3); border-radius: 15px;">
-                    <img src="imagenes/Arquitectura.png" alt="Arquitectura del Proyecto" style="border-radius: 13px;" onerror="this.style.display='none'">
+                <div class="image-box scale-in delay-2" style="height: 480px; border: 2px solid rgba(0,243,255,0.2); background: rgba(0,0,0,0.3); border-radius: 15px; cursor: pointer;" onclick="openModal('arquitectura')" title="Hacer clic para ampliar">
+                    <img src="imagenes/contenedor.jpeg" alt="Arquitectura del Proyecto" style="border-radius: 13px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.display='none'">
                 </div>
 
                 <div style="display: flex; justify-content: center; gap: 1.2rem; margin-top: 1.2rem; flex-wrap: wrap;" class="fade-up delay-3">
@@ -473,22 +475,20 @@
         </section>
 
         <!-- ======== SLIDE 5: FLUJO LOGICA NEGOCIO (Frontend) ======== -->
-        <section class="slide slide-5" id="s5" data-mascot="Este diagrama muestra cómo fluye la lógica del negocio desde el cliente hasta las recompensas.">
+        <section class="slide slide-5" id="s5" data-mascot="Este diagrama muestra cómo el sistema AIBanks se relaciona con actores externos (usuario, FIFA API, Google Cloud, Supabase).">
             <div class="bg-overlay"></div>
             <div class="container">
-                <h2 class="section-title fade-up">Flujo de la Lógica del Negocio</h2>
+                <h2 class="section-title fade-up">Actores externos</h2>
                 <div class="deco-line deco-line-gold fade-up delay-1"></div>
-                <p class="fade-up delay-1" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem;">Cómo se conecta cada componente del ecosistema AI-Bank</p>
+                <p class="fade-up delay-1" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1.5rem;">C4 System Context</p>
                 
-                <div class="image-box scale-in delay-2" style="height: 500px; border: 2px solid rgba(255,204,0,0.25); background: rgba(0,0,0,0.3); border-radius: 15px; box-shadow: var(--neon-gold-glow);">
-                    <img src="imagenes/Frontend.png" alt="Flujo de la Lógica del Negocio" style="border-radius: 13px;" onerror="this.style.display='none'">
+                <div class="image-box scale-in delay-2" style="height: 500px; border: 2px solid rgba(255,204,0,0.25); background: rgba(0,0,0,0.3); border-radius: 15px; box-shadow: var(--neon-gold-glow); cursor: pointer;" onclick="openModal('contexto')" title="Hacer clic para ampliar">
+                    <img src="imagenes/contexto.jpeg" alt="Flujo de la Lógica del Negocio" style="border-radius: 13px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.display='none'">
                 </div>
 
                 <div style="display: flex; justify-content: center; gap: 1.2rem; margin-top: 1.2rem; flex-wrap: wrap;" class="fade-up delay-3">
-                    <div class="neon-badge" style="background: rgba(0,243,255,0.08); border: 1px solid rgba(0,243,255,0.25); color: var(--neon-cyan);">👤 Cliente</div>
-                    <div class="neon-badge" style="background: rgba(255,204,0,0.08); border: 1px solid rgba(255,204,0,0.25); color: var(--neon-gold);">🧠 Motor IA</div>
-                    <div class="neon-badge" style="background: rgba(255,45,149,0.08); border: 1px solid rgba(255,45,149,0.25); color: var(--neon-magenta);">🎯 Pronóstico</div>
-                    <div class="neon-badge" style="background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.25); color: var(--neon-green);">🏆 Recompensas</div>
+                    <div class="neon-badge" style="background: rgba(0,243,255,0.08); border: 1px solid rgba(0,243,255,0.25); color: var(--neon-cyan);">👤 Usuario</div>
+                    <div class="neon-badge" style="background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.25); color: var(--neon-green);">🏆 FIFA API</div>
                 </div>
             </div>
         </section>
@@ -516,10 +516,11 @@
                         </div>
                     </div>
                     
-                    <div class="ai-node fade-up delay-3" style="text-align: center; border-color: var(--neon-magenta);">
+                    <div class="ai-node fade-up delay-3" style="text-align: center; border-color: var(--neon-magenta); cursor: pointer;" onclick="openModal('aigent')">
                         <img src="imagenes/modelochat.png" style="width: 65px; height: 65px; object-fit: contain; margin-bottom: 8px;" alt="AI-Gent">
                         <h4 style="color: var(--neon-magenta);">🤖 AI-GENT</h4>
                         <p>Alimentado con toda la información de la app para <strong style="color: var(--neon-magenta);">resolver dudas</strong> y asistir al usuario <strong style="color: var(--neon-magenta);">en tiempo real</strong>.</p>
+                        <div class="neon-badge" style="background: rgba(255,45,149,0.06); border: 1px solid rgba(255,45,149,0.2); color: var(--neon-magenta); font-size: 0.75rem; margin-top: 0.8rem;">🧠 Gemma 4 · Google AI</div>
                     </div>
 
                     <div class="grid-cols-3 fade-up delay-4">
@@ -644,7 +645,7 @@
                     <div class="tech-card fade-up delay-1" style="border-color: rgba(0,243,255,0.3); text-align: left;">
                         <h3 class="neon-cyan" style="text-align: center;">Quality Assurance</h3>
                         <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-muted); margin-bottom: 1rem;">
-                            Integración de análisis estático de código mediante <strong style="color: var(--neon-cyan);">SonarQube</strong>, garantizando buenas prácticas, detección de vulnerabilidades y mantenibilidad del código.
+                            Integración de análisis estático de código mediante <strong style="color: var(--neon-cyan);">SonarQube</strong>, garantizando buenas prácticas, detección de vulnerabilidades y mantenibilidad del código. Ademas se realizo diagramas C4 para un mejor entendimiento.
                         </p>
                         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
                             <span class="neon-badge" style="background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.25); color: var(--neon-green); font-size: 0.75rem;">✓ Code Smells</span>
@@ -660,6 +661,7 @@
                             <li><strong class="neon-gold" style="font-size: 1.1rem;">✓</strong> Guía interactiva incorporada para el usuario</li>
                             <li><strong class="neon-gold" style="font-size: 1.1rem;">✓</strong> Colores estéticos basados en MoodBoard</li>
                             <li><strong class="neon-gold" style="font-size: 1.1rem;">✓</strong> Diseño Mobile-First responsivo</li>
+                            <li><strong class="neon-gold" style="font-size: 1.1rem;">✓</strong> Disponible en español e inglés, pensada para usuarios de toda la región.</li>
                         </ul>
                     </div>
                 </div>
@@ -674,7 +676,7 @@
                 <div class="deco-line deco-line-gold fade-up delay-1"></div>
                 <p class="fade-up delay-1" style="font-size: 1.05rem; margin-bottom: 2rem; color: var(--text-muted);">Las tecnologías que impulsan AI-Bank</p>
 
-                <div class="grid-cols-2 fade-up delay-2" style="gap: 1.5rem;">
+                <div class="fade-up delay-2" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
                     <div class="glass-panel" style="text-align: center; border-color: #61dafb; padding: 1.5rem;">
                         <div style="font-size: 2.5rem; margin-bottom: 0.3rem;">⚛️</div>
                         <h4 style="color: #61dafb; font-size: 1.3rem; margin-bottom: 6px; font-family: 'Space Grotesk', sans-serif; font-weight: 700;">React</h4>
@@ -685,9 +687,14 @@
                         <h4 style="color: #3ecf8e; font-size: 1.3rem; margin-bottom: 6px; font-family: 'Space Grotesk', sans-serif; font-weight: 700;">Supabase</h4>
                         <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Elegido por su persistencia Postgres y WebSockets robustos, vitales para procesar transacciones en tiempo real sin latencia.</p>
                     </div>
+                    <div class="glass-panel" style="text-align: center; border-color: #4dc8cf; padding: 1.5rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 0.3rem;">📦</div>
+                        <h4 style="color: #4dc8cf; font-size: 1.3rem; margin-bottom: 6px; font-family: 'Space Grotesk', sans-serif; font-weight: 700;">Apache Cordova</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5;">Para empaquetar el código web y convertirlo en una APK instalable en dispositivos Android.</p>
+                    </div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.2rem;" class="fade-up delay-3">
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-top: 1.2rem;" class="fade-up delay-3">
                     <div class="glass-panel" style="text-align: center; border-color: rgba(255,255,255,0.25); padding: 1.2rem 0.8rem;">
                         <div style="font-size: 1.6rem;">🐙</div>
                         <h4 style="color: #fff; font-size: 0.95rem; font-family: 'Space Grotesk', sans-serif;">GitHub</h4>
@@ -707,6 +714,11 @@
                         <div style="font-size: 1.6rem;">📧</div>
                         <h4 style="color: #e535ab; font-size: 0.95rem; font-family: 'Space Grotesk', sans-serif;">EmailJS</h4>
                         <p style="font-size: 0.75rem; color: var(--text-muted);">Requerido para generar alertas automatizadas sin servidores.</p>
+                    </div>
+                    <div class="glass-panel" style="text-align: center; border-color: var(--neon-cyan); padding: 1.2rem 0.8rem;">
+                        <div style="font-size: 1.6rem;">🧠</div>
+                        <h4 style="color: var(--neon-cyan); font-size: 0.95rem; font-family: 'Space Grotesk', sans-serif;">IA</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">Modelos de clasificación, predicción y LLM.</p>
                     </div>
                 </div>
 
@@ -933,6 +945,27 @@
             body.innerHTML = '';
             if (type === 'kmeans') {
                 body.innerHTML = '<div class="modal-img-item" style="max-width: 800px;"><img src="imagenes/kmeans.png" alt="K-Means Clustering"></div>';
+            } else if (type === 'aigent') {
+                body.innerHTML = `
+                    <div style="max-width: 900px; width: 100%;">
+                        <h3 style="color: var(--neon-magenta); font-family: 'Space Grotesk'; font-size: 1.5rem; margin-bottom: 1.2rem; text-align: center;">🤖 Modelo LLM — Gemma 4</h3>
+                        <div style="background: rgba(255,45,149,0.06); border: 1px solid rgba(255,45,149,0.25); border-radius: 12px; padding: 1.4rem 1.8rem; margin-bottom: 1.5rem; line-height: 1.8; color: var(--text-main); font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem;">
+                            <p style="margin-bottom: 0.8rem;">Se entrenó un modelo <strong style="color: var(--neon-magenta);">LLM Gemma 4</strong> — modelo ligero disponible en <strong style="color: #fff;">Google AI Playground</strong>, aprovechando servicios gratuitos.</p>
+                            <p style="margin-bottom: 0.8rem;">Integrado mediante el <strong style="color: var(--neon-cyan);">Google AI Development Kit</strong> como asistente virtual con el objetivo de proporcionar sugerencias precisas sobre el uso de la aplicación.</p>
+                            <p style="margin-bottom: 0;">Se controla la <strong style="color: var(--neon-gold);">temperatura del modelo</strong> para evitar respuestas fuera de contexto y mantener el foco en temas relevantes de la app — el mismo enfoque aplicado en las <strong style="color: var(--neon-cyan);">APIs de la FIFA</strong>.</p>
+                        </div>
+                        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                            <div class="modal-img-item" style="flex: 1; min-width: 280px;">
+                                <h4 style="color: var(--neon-cyan); margin-bottom: 10px; text-align: center; font-family: 'Space Grotesk';">Chat AI-Gent</h4>
+                                <img src="imagenes/chatbot_chat.jpg" alt="Chatbot Chat">
+                            </div>
+                            <div class="modal-img-item" style="flex: 1; min-width: 280px;">
+                                <h4 style="color: var(--neon-magenta); margin-bottom: 10px; text-align: center; font-family: 'Space Grotesk';">Gemma 4 — Google AI</h4>
+                                <img src="imagenes/gema.png" alt="Gemma Model">
+                            </div>
+                        </div>
+                    </div>
+                `;
             } else if (type === 'prediccion') {
                 body.innerHTML = `
                     <div style="display: flex; gap: 2rem; width: 100%; align-items: center; justify-content: center;">
@@ -946,6 +979,16 @@
                         </div>
                     </div>
                 `;
+            } else if (type === 'arquitectura') {
+                body.innerHTML = `
+                    <div class="modal-img-item" style="max-width: none; background: transparent; border: none; padding: 0; text-align: center;">
+                        <img src="imagenes/contenedor.jpeg" alt="Arquitectura" style="max-height: 85vh; max-width: 100%; cursor: zoom-in; transition: all 0.3s ease;" onclick="if(this.style.maxHeight==='85vh'){this.style.maxHeight='none';this.style.maxWidth='none';this.style.cursor='zoom-out';}else{this.style.maxHeight='85vh';this.style.maxWidth='100%';this.style.cursor='zoom-in';} event.stopPropagation();">
+                    </div>`;
+            } else if (type === 'contexto') {
+                body.innerHTML = `
+                    <div class="modal-img-item" style="max-width: none; background: transparent; border: none; padding: 0; text-align: center;">
+                        <img src="imagenes/contexto.jpeg" alt="Contexto" style="max-height: 85vh; max-width: 100%; cursor: zoom-in; transition: all 0.3s ease;" onclick="if(this.style.maxHeight==='85vh'){this.style.maxHeight='none';this.style.maxWidth='none';this.style.cursor='zoom-out';}else{this.style.maxHeight='85vh';this.style.maxWidth='100%';this.style.cursor='zoom-in';} event.stopPropagation();">
+                    </div>`;
             }
             modal.classList.add('show');
         }
