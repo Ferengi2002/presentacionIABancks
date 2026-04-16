@@ -69,11 +69,11 @@
         .section-title { font-size: 3.5rem; margin-bottom: 1.5rem; color: var(--text-main); text-shadow: 0 0 15px rgba(255,255,255,0.2); }
 
         /* Mascot */
-        #mascot-container { position: fixed; bottom: 20px; right: 30px; z-index: 1000; transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); opacity: 0; transform: translateX(50px); }
+        #mascot-container { position: fixed; bottom: 0px; right: -10px; z-index: 1000; transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); opacity: 0; transform: translateX(50px); }
         #mascot-container.visible { opacity: 1; transform: translateX(0); }
-        #mascot-bubble { background: rgba(10, 15, 25, 0.9); backdrop-filter: blur(15px); border: 1px solid var(--neon-cyan); border-radius: 15px; padding: 12px; position: absolute; bottom: 135px; right: 5px; width: 230px; opacity: 0; transform: translateY(20px); transition: 0.5s; box-shadow: var(--neon-cyan-glow); color: var(--text-main); font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; line-height: 1.4; border-bottom-right-radius: 0; }
+        #mascot-bubble { background: rgba(10, 15, 25, 0.9); backdrop-filter: blur(15px); border: 1px solid var(--neon-cyan); border-radius: 15px; padding: 12px; position: absolute; bottom: 200px; right: 20px; width: 240px; opacity: 0; transform: translateY(20px); transition: 0.5s; box-shadow: var(--neon-cyan-glow); color: var(--text-main); font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; line-height: 1.4; border-bottom-right-radius: 0; }
         #mascot-bubble.show { opacity: 1; transform: translateY(0); }
-        .mascot-img { width: 115px; filter: drop-shadow(0 0 15px rgba(0,243,255,0.6)); animation: float 4s infinite ease-in-out; }
+        .mascot-img { width: 230px; filter: drop-shadow(0 0 18px rgba(0,243,255,0.6)); animation: float 4s infinite ease-in-out; }
 
         /* Panels */
         .glass-panel { background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1px solid rgba(0,243,255,0.25); border-radius: 15px; padding: 2rem; box-shadow: 0 8px 25px rgba(0,0,0,0.4); text-align: left; transition: 0.4s; }
@@ -105,6 +105,10 @@
         .slide-8 .bg-overlay { background: linear-gradient(135deg, rgba(57,255,20,0.03), rgba(5,7,10,0.95) 50%, rgba(0,243,255,0.04)); }
         .slide-9 .bg-overlay { background: radial-gradient(circle at center, rgba(255,204,0,0.05), transparent 50%), rgba(5,7,10,0.92); }
         .slide-10 .bg-overlay { background: radial-gradient(ellipse at center, rgba(0,243,255,0.08), transparent 40%), radial-gradient(ellipse at 80% 80%, rgba(255,204,0,0.06), transparent 40%), rgba(5,7,10,0.9); }
+        .slide-11 .bg-overlay { background: radial-gradient(ellipse at center, rgba(0,243,255,0.07), transparent 45%), radial-gradient(ellipse at 80% 80%, rgba(255,204,0,0.05), transparent 40%), rgba(5,7,10,0.9); }
+        .slide-objetivo .bg-overlay { background: radial-gradient(ellipse at 25% 60%, rgba(0,243,255,0.12) 0%, transparent 55%), radial-gradient(ellipse at 80% 20%, rgba(0,243,255,0.05) 0%, transparent 40%), rgba(5,7,10,0.95); }
+        .slide-problematica .bg-overlay { background: radial-gradient(ellipse at 75% 50%, rgba(255,45,149,0.12) 0%, transparent 55%), radial-gradient(circle at 20% 80%, rgba(255,45,149,0.05) 0%, transparent 40%), rgba(5,7,10,0.95); }
+        .slide-solucion .bg-overlay { background: radial-gradient(ellipse at 50% 40%, rgba(57,255,20,0.07) 0%, transparent 55%), radial-gradient(circle at 80% 70%, rgba(255,204,0,0.07) 0%, transparent 40%), rgba(5,7,10,0.95); }
 
         /* Integrantes */
         .integrante-card { background: linear-gradient(180deg, rgba(0,243,255,0.06) 0%, rgba(0,0,0,0.6) 100%); border: 1px solid rgba(0,243,255,0.2); border-radius: 12px; padding: 1.5rem 1rem; text-align: center; transition: 0.35s; }
@@ -196,7 +200,7 @@
             <div id="mascot-bubble">
                 <p id="mascot-text">¡Hola! Soy tu asistente de AI-Bank.</p>
             </div>
-            <img src="imagenes/mascot.png" alt="Mascota" class="mascot-img" style="cursor: pointer;" onclick="document.getElementById('mascot-bubble').classList.toggle('show')" onerror="this.style.display='none'">
+            <img src="imagenes/mascota.png" alt="Mascota" class="mascot-img" style="cursor: pointer;" onclick="document.getElementById('mascot-bubble').classList.toggle('show')" onerror="this.style.display='none'">
         </div>
     </div>
 
@@ -213,6 +217,9 @@
         <div class="dot" onclick="scrollToSlide(8)"></div>
         <div class="dot" onclick="scrollToSlide(9)"></div>
         <div class="dot" onclick="scrollToSlide(10)"></div>
+        <div class="dot" onclick="scrollToSlide(11)"></div>
+        <div class="dot" onclick="scrollToSlide(12)"></div>
+        <div class="dot" onclick="scrollToSlide(13)"></div>
     </div>
 
     <div class="slider-container" id="slider">
@@ -266,8 +273,125 @@
                 <div class="deco-line deco-line-cyan fade-up delay-1"></div>
                 <div class="video-container scale-in delay-2">
                     <video controls muted>
-                        <source src="imagenes/AI-GENT-FINAL FINAL VERSION ULTRA FINAL.mp4">
+                        <source src="imagenes/videoaibanks.mp4">
                     </video>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== SLIDE OBJETIVO ======== -->
+        <section class="slide slide-objetivo" id="s-obj" data-mascot="Nuestro objetivo: convertir cada acción bancaria en una experiencia gamificada que fideliza de verdad.">
+            <div class="bg-overlay"></div>
+            <div class="container">
+                <div class="neon-badge fade-up" style="background:rgba(0,243,255,0.08); border:1px solid var(--neon-cyan); color:var(--neon-cyan); margin-bottom:0.8rem;">OBJETIVO DEL PROYECTO</div>
+                <h2 class="section-title fade-up delay-1" style="margin-bottom:0.3rem;">¿Qué Buscamos?</h2>
+                <div class="deco-line deco-line-cyan fade-up delay-1"></div>
+                <div class="fade-up delay-2" style="display:flex; gap:3rem; align-items:center; margin-top:1.2rem; text-align:left;">
+                    <div style="flex:1; display:flex; justify-content:center; align-items:center;">
+                        <div style="border:1px solid rgba(0,243,255,0.3); border-radius:15px; overflow:hidden; box-shadow:0 0 25px rgba(0,243,255,0.15); background:rgba(0,0,0,0.3);">
+                            <img src="imagenes/fidelizacion.png" alt="Fidelización" style="width:100%; height:100%; object-fit:contain; display:block; border-radius:14px;">
+                        </div>
+                    </div>
+                    <div style="flex:1.3; display:flex; flex-direction:column; gap:1rem;">
+                        <p style="color:var(--text-muted); font-size:1.1rem; line-height:1.7; margin-bottom:0.3rem;">
+                            Fortalecer la <strong style="color:var(--neon-cyan);">fidelización bancaria</strong> con gamificación, IA y regalos únicos para cada cliente.
+                        </p>
+                        <div style="background:rgba(0,243,255,0.04); border:1px solid rgba(0,243,255,0.2); border-radius:12px; padding:1rem 1.4rem; display:flex; align-items:center; gap:1rem; transition:0.3s;" onmouseover="this.style.borderColor='var(--neon-cyan)'" onmouseout="this.style.borderColor='rgba(0,243,255,0.2)'">
+                            <span style="font-size:1.8rem; flex-shrink:0;">🎮</span>
+                            <div><strong style="color:var(--neon-cyan); font-size:1rem;">Gamificación Mundial 2026</strong><p style="color:var(--text-muted); font-size:0.88rem; margin-top:2px;">Transferencias y pronósticos que suman mAiles</p></div>
+                        </div>
+                        <div style="background:rgba(255,204,0,0.04); border:1px solid rgba(255,204,0,0.2); border-radius:12px; padding:1rem 1.4rem; display:flex; align-items:center; gap:1rem; transition:0.3s;" onmouseover="this.style.borderColor='var(--neon-gold)'" onmouseout="this.style.borderColor='rgba(255,204,0,0.2)'">
+                            <span style="font-size:1.8rem; flex-shrink:0;">🪙</span>
+                            <div><strong style="color:var(--neon-gold); font-size:1rem;">mAiles Personalizados</strong><p style="color:var(--text-muted); font-size:0.88rem; margin-top:2px;">Recompensas adaptadas al perfil de cada usuario</p></div>
+                        </div>
+                        <div style="background:rgba(255,45,149,0.04); border:1px solid rgba(255,45,149,0.2); border-radius:12px; padding:1rem 1.4rem; display:flex; align-items:center; gap:1rem; transition:0.3s;" onmouseover="this.style.borderColor='var(--neon-magenta)'" onmouseout="this.style.borderColor='rgba(255,45,149,0.2)'">
+                            <span style="font-size:1.8rem; flex-shrink:0;">🏆</span>
+                            <div><strong style="color:var(--neon-magenta); font-size:1rem;">Diferenciación Real</strong><p style="color:var(--text-muted); font-size:0.88rem; margin-top:2px;">Fidelización que ningún banco tradicional puede replicar</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== SLIDE PROBLEMÁTICA ======== -->
+        <section class="slide slide-problematica" id="s-prob" data-mascot="Los bancos tienen baja interacción diaria. Los clientes se sienten solo un número más.">
+            <div class="bg-overlay"></div>
+            <div class="container">
+                <div class="neon-badge fade-up" style="background:rgba(255,45,149,0.08); border:1px solid var(--neon-magenta); color:var(--neon-magenta); margin-bottom:0.8rem;">PROBLEMÁTICA</div>
+                <h2 class="section-title fade-up delay-1" style="margin-bottom:0.3rem;">El Problema Real</h2>
+                <div class="deco-line fade-up delay-1" style="height:3px; border-radius:3px; margin:0.8rem auto 0; background:linear-gradient(90deg, transparent, var(--neon-magenta), transparent); width:200px; box-shadow:0 0 8px var(--neon-magenta);"></div>
+                <div class="fade-up delay-2" style="display:flex; gap:2.5rem; align-items:center; margin-top:1rem; text-align:left;">
+                    <div style="flex:1; display:flex; justify-content:center; align-items:center;">
+                        <div style="border:1px solid rgba(255,45,149,0.3); border-radius:15px; overflow:hidden; box-shadow:0 0 25px rgba(255,45,149,0.15); background:rgba(0,0,0,0.3);">
+                            <img src="imagenes/slide_solucion.png" alt="Problemática" style="width:100%; height:100%; object-fit:contain; display:block; border-radius:14px;">
+                        </div>
+                    </div>
+                    <div style="flex:1.2; display:flex; flex-direction:column; gap:1.1rem;">
+                        <div style="background:rgba(255,45,149,0.05); border:1px solid rgba(255,45,149,0.22); border-radius:12px; padding:1.2rem 1.4rem; transition:0.3s;" onmouseover="this.style.borderColor='var(--neon-magenta)'" onmouseout="this.style.borderColor='rgba(255,45,149,0.22)'">
+                            <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.4rem;">
+                                <span style="font-size:1.6rem;">📉</span>
+                                <strong style="color:var(--neon-magenta); font-size:1rem;">Baja Interacción Diaria</strong>
+                            </div>
+                            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.55; padding-left:2.4rem;">Los clientes solo abren la app para operaciones básicas. Sin eso, no hay contacto.</p>
+                        </div>
+                        <div style="background:rgba(255,45,149,0.05); border:1px solid rgba(255,45,149,0.22); border-radius:12px; padding:1.2rem 1.4rem; transition:0.3s;" onmouseover="this.style.borderColor='var(--neon-magenta)'" onmouseout="this.style.borderColor='rgba(255,45,149,0.22)'">
+                            <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.4rem;">
+                                <span style="font-size:1.6rem;">🔢</span>
+                                <strong style="color:var(--neon-magenta); font-size:1rem;">Sin Personalización</strong>
+                            </div>
+                            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.55; padding-left:2.4rem;">El cliente siente que es solo un número más, sin beneficios adaptados a su perfil.</p>
+                        </div>
+                        <div style="background:rgba(255,45,149,0.05); border:1px solid rgba(255,45,149,0.22); border-radius:12px; padding:1.2rem 1.4rem; transition:0.3s;" onmouseover="this.style.borderColor='var(--neon-magenta)'" onmouseout="this.style.borderColor='rgba(255,45,149,0.22)'">
+                            <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.4rem;">
+                                <span style="font-size:1.6rem;">⚡</span>
+                                <strong style="color:var(--neon-magenta); font-size:1rem;">Fidelización Débil</strong>
+                            </div>
+                            <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.55; padding-left:2.4rem;">La competencia puede reemplazar a AI-Bank fácilmente si no hay diferenciación real.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======== SLIDE SOLUCIÓN ======== -->
+        <section class="slide slide-solucion" id="s-sol" data-mascot="La solución: gamificación + IA + recompensas personalizadas en una sola app para clientes AI-Bank.">
+            <div class="bg-overlay"></div>
+            <div class="container">
+                <div class="neon-badge fade-up" style="background:rgba(57,255,20,0.06); border:1px solid var(--neon-green); color:var(--neon-green); margin-bottom:0.8rem;">SOLUCIÓN</div>
+                <h2 class="section-title fade-up delay-1" style="margin-bottom:0.3rem;">La Respuesta de AI-Bank</h2>
+                <div class="deco-line deco-line-gold fade-up delay-1"></div>
+                <div class="fade-up delay-2" style="display:flex; gap:2.5rem; align-items:center; margin-top:1rem; text-align:left;">
+                    <div style="flex:1; display:flex; justify-content:center; align-items:center;">
+                        <div style="border:1px solid rgba(57,255,20,0.25); border-radius:15px; overflow:hidden; box-shadow:0 0 25px rgba(57,255,20,0.1); background:rgba(0,0,0,0.3);">
+                            <img src="imagenes/mascota.png" alt="Mascota AI-Bank" style="width:100%; height:100%; object-fit:contain; display:block; border-radius:14px;">
+                        </div>
+                    </div>
+                    <div style="flex:1.2; display:flex; flex-direction:column; gap:1.1rem;">
+                        <p style="color:var(--text-muted); font-size:1.05rem; line-height:1.7; margin-bottom:0.3rem;">
+                            App <strong style="color:var(--neon-green);">exclusiva para clientes AI-Bank</strong> que combina tres pilares poderosos:
+                        </p>
+                        <div style="background:rgba(0,243,255,0.04); border:1px solid rgba(0,243,255,0.2); border-radius:12px; padding:1.1rem 1.4rem; transition:0.3s;" onmouseover="this.style.borderColor='var(--neon-cyan)'" onmouseout="this.style.borderColor='rgba(0,243,255,0.2)'">
+                            <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.3rem;">
+                                <span style="font-size:1.6rem; flex-shrink:0;">🎮</span>
+                                <strong style="color:var(--neon-cyan); font-size:1rem;">Gamificación + Mundial</strong>
+                            </div>
+                            <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.55; padding-left:2.4rem;">Gana mAiles por transferencias y pronósticos del mundial 2026.</p>
+                        </div>
+                        <div style="background:rgba(255,204,0,0.04); border:1px solid rgba(255,204,0,0.2); border-radius:12px; padding:1.1rem 1.4rem; transition:0.3s;" onmouseover="this.style.borderColor='var(--neon-gold)'" onmouseout="this.style.borderColor='rgba(255,204,0,0.2)'">
+                            <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.3rem;">
+                                <span style="font-size:1.6rem; flex-shrink:0;">🧠</span>
+                                <strong style="color:var(--neon-gold); font-size:1rem;">IA Personalizada</strong>
+                            </div>
+                            <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.55; padding-left:2.4rem;">Perfil crediticio + Arquetipo de personalidad para beneficios únicos + Predicciones + Asistente virtual.</p>
+                        </div>
+                        <div style="background:rgba(57,255,20,0.04); border:1px solid rgba(57,255,20,0.2); border-radius:12px; padding:1.1rem 1.4rem; transition:0.3s;" onmouseover="this.style.borderColor='var(--neon-green)'" onmouseout="this.style.borderColor='rgba(57,255,20,0.2)'">
+                            <div style="display:flex; align-items:center; gap:0.8rem; margin-bottom:0.3rem;">
+                                <span style="font-size:1.6rem; flex-shrink:0;">🏆</span>
+                                <strong style="color:var(--neon-green); font-size:1rem;">Recompensas Reales</strong>
+                            </div>
+                            <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.55; padding-left:2.4rem;">Catálogo de premios que se pueden canjear por los mAiles.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -324,7 +448,7 @@
                         </div>
                     </div>
                     <div style="flex: 1.2; border: 1px solid var(--neon-gold); border-radius: 15px; overflow: hidden; box-shadow: var(--neon-gold-glow); display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.3); padding: 0.5rem;">
-                        <img src="imagenes/logica_negocio.png" alt="Lógica de Negocio" style="width: 100%; height: 100%; object-fit: contain; border-radius: 10px;" onerror="this.src='imagenes/business_logic.png'">
+                        <img src="imagenes/logica.png" alt="Lógica de Negocio" style="width: 100%; height: 100%; object-fit: contain; border-radius: 10px;" onerror="this.src='imagenes/business_logic.png'">
                     </div>
                 </div>
             </div>
@@ -685,7 +809,7 @@
                     }
 
                     // Confetti only on the final slide
-                    if (entry.target.id === 's10') triggerConfetti();
+                    if (entry.target.id === 's11') triggerConfetti();
 
                     // Animate counters on slide 1
                     if (entry.target.id === 's1' && !entry.target.dataset.counted) {
